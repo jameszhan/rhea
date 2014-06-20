@@ -31,7 +31,7 @@ def nqueen(n):
         return True
     backtracking([0 for i in range(n)], 0, check, lambda a : print(a))
 
-#nqueen(4)
+nqueen(4)
 
 def permutation(l):
     def check(a, k):
@@ -42,7 +42,7 @@ def permutation(l):
     backtracking([0 for i in range(len(l))], 0, check, \
                  lambda a : print([l[a[i]] for i in range(len(a))]) )
 
-#permutation(['A', 'B', 'C'])
+permutation(['A', 'B', 'C'])
 
 
 
