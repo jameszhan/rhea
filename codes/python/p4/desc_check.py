@@ -1,5 +1,6 @@
-import sys, re
+import sys
 from P4 import P4, P4Exception
+from rhea.codes.python import re
 
 NEW_DESCRIPTION = '<enter description here>'
 DESCRIPTION_TEMPLATE = 'Mingle #Num: Your comment'

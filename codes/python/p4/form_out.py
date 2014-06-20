@@ -1,5 +1,5 @@
-import sys, re
-
+import sys
+from rhea.codes.python import re
 
 
 def edit_description(formfile, callback):

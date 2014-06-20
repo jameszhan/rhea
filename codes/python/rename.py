@@ -1,5 +1,6 @@
 import os
-import re
+from rhea.codes.python import re
+
 
 def each(items, predicate, func):
     for item in items:

@@ -1,5 +1,8 @@
 from P4 import P4, P4Exception
-import sys, re, os
+import sys
+import os
+from rhea.codes.python import re
+
 
 def show_error_message(msg):
 	sys.exit(msg)

@@ -1,5 +1,3 @@
-import re
-
 def formatNum(num):
     p = re.compile('(?<=\d)(?=(\d{3})+$)')
     return p.sub(',', str(num))

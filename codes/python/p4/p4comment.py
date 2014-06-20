@@ -1,4 +1,6 @@
-import sys, re
+import sys
+from rhea.codes.python import re
+
 
 def fetch_description(formfile):
     def fetch_form_content():

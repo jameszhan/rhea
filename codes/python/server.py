@@ -1,7 +1,7 @@
 import select
 import socket
 import os
-import re
+from rhea.codes.python import re
 
 SERVER_NAME='localhost'
 SERVER_PORT=8888

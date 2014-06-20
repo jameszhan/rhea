@@ -1,5 +1,4 @@
 import os
-import re
 
 filenames = os.listdir(os.curdir);
 print('当前的文件夹是：', os.curdir);
