@@ -10,11 +10,7 @@ def ok(l, k):
             return False
         i = i + 1
     return True
-
-
-
-
-
+    
 def permutation():
     pos = [-1 for i in range(N)]
     k = 0

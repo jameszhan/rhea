@@ -1,17 +1,42 @@
 # -*- coding: utf8 -*-
 __author__ = 'james'
 
-class base(object):
-    v = 1
-    def __init__(self):
-          pass
-          
+"""
+'__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', 
+'__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', 
+'__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', 
+'__setattr__', '__sizeof__', '__str__', '__subclasshook__'
+"""
 
-b = base()
-print b.__dict__
-b.x = 2
-print b.__dict__
+class Base(object):
+    def __getattr__(self, name):
+        print("__getattr__", self, name)
+        return name + " from getattr" 
+    
+    def __getattribute__(self, *args, **kwargs):
+        print("__getattribute__", self, *args, **kwargs)
+        return super(Base, self).__getattribute__(*args, **kwargs)
+    
+    def __get__(self, instance, owner):
+        print("__get__", self, instance, owner)
+        return self
+        
+class Other(object):  
+    b = Base()
 
+if __name__ == '__main__':
+    print("dir(base) => ", dir(Base))    
+    print("Base.__hash__ => ", Base.__hash__)
+    print('\n\n')
+    b = Base()
+    print("dir(b) => ", dir(b))
+    print("b.__hash__ => ", b.__hash__)
+    
+    print("\n\n")
+    print("------------------------")
+    print(b.x)
 
-
+    o = Other()  
+    o.b  
+    print(o.b.a)
 
