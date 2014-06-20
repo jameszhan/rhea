@@ -42,7 +42,8 @@ def edge(u, v, mat):
 def heap(v, mat):
     return min((mat[v][i], i) for i in range(len(mat[v])))
 
-def mark(v, )
+
+#def mark(v, )
 
 
 def dijkstra(mat):

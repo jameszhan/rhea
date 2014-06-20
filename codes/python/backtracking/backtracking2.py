@@ -6,11 +6,10 @@ def counter(n, m, handle):
                 handle(a)
             else:
                 track(a, k + 1)
-    a = [0 for i in range(m)]
+    a = [0 for _ in range(m)]
     track(a, 0)
 
-
-counter(5, 3, lambda a : print(a))
+counter(5, 3, lambda a: print(a))
 
 
 def backtracking(a, k, check, handle):
