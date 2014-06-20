@@ -17,14 +17,15 @@ class Base(object):
             return l
         elif name == 'world':
             return hi
-        else:
-            return name + " not found."
+        else: 
+            raise AttributeError(name)
+            pass
         
 
 if __name__ == '__main__': 
     b = Base()
     print(b.x, b.y, b.z)
-    print(b.a)
     print(b.hello(1))
-    print(b.world('James'))
+    print(b.world('James'))    
+    #print(b.a)
     
