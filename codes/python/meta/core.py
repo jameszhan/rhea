@@ -13,9 +13,9 @@ class Base(object):
         print("__getattr__", self, name)
         return name + " from getattr" 
     
-    def __getattribute__(self, *args, **kwargs):
-        print("__getattribute__", self, *args, **kwargs)
-        return super(Base, self).__getattribute__(*args, **kwargs)
+    def __getattribute__(self, *args):
+        print("__getattribute__", self, *args)
+        return super(Base, self).__getattribute__(*args)
     
     def __get__(self, instance, owner):
         print("__get__", self, instance, owner)

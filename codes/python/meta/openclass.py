@@ -1,9 +1,11 @@
 # -*- coding: utf8 -*-
 __author__ = 'james'
 
+
 class Base(object):
     def hello(self, name):
-        return "hello %s" %name
+        return "hello %s" % name
+
     def world(self):
         return "James's world"
         

@@ -1,14 +1,16 @@
 # -*- coding: utf8 -*-
 __author__ = 'james'
 
+
 def hi(name):
     return "hello %s" % name
 
+
 class Base(object):
     def __init__(self):
-      self.x = 'x'
-      self.y = 'y'
-      self.z = 'z'
+        self.x = 'x'
+        self.y = 'y'
+        self.z = 'z'
         
     def __getattr__(self, name):
         if name == 'hello':
