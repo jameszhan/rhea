@@ -1,0 +1,26 @@
+#include <stdio.h>int main(){   
+	/* Setup database connection -- replace postgres/password w/ the      
+	username/password on your system*/   
+	EXEC SQL CONNECT TO unix:postgresql://localhost/test USER postgres/password;   
+	/* These variables are going to be used for temporary storage w/ the database */   
+	EXEC SQL BEGIN DECLARE SECTION;   
+	int my_id;   VARCHAR my_name[200];   
+	EXEC SQL END DECLARE SECTION;   
+	/* This is the statement we are going to execute */   
+	EXEC SQL DECLARE test_cursor CURSOR FOR      
+	SELECT id, name FROM people ORDER BY name;   
+	/* Run the statement */   
+	EXEC SQL OPEN test_cursor;   
+	EXEC SQL WHENEVER NOT FOUND GOTO close_test_cursor;   
+	while(1) /* our previous statement will handle exitting the loop */   
+	{      
+		/* Fetch the next value */      
+		EXEC SQL FETCH test_cursor INTO :my_id, :my_name;      
+		printf("Fetched ID is %d and fetched name is %s\n", my_id, my_name.arr);   
+	}   
+	/* Cleanup */   
+	close_test_cursor:   
+	EXEC SQL CLOSE test_cursor;   
+	EXEC SQL DISCONNECT;   
+	return 0;
+}

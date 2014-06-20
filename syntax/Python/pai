@@ -1,0 +1,7 @@
+
+
+def pai(n, size):
+    if(size == 1):
+        return size
+    for i in range(n):
+        

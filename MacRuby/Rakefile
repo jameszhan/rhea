@@ -1,0 +1,31 @@
+#require "rakes"
+
+
+task :walk_dog do
+  puts "Dog Walked."
+end
+
+namespace :demo do
+  task :hello do |t|
+    puts "Hello World!"
+  end
+end
+
+
+#See Kernel, Object, Module
+namespace :introspection do
+  task :hello do |t|
+    puts t.class
+    print 'global_variables = ' + global_variables.to_s + "\n"
+    print 'local_variables = ' + local_variables.to_s + "\n"
+    print "__FILE__ = #{__FILE__}, __callee__ = #{__callee__}, __id__ = #{__id__}, __method__ = #{__method__}, __LINE__ = #{__LINE__}\n"
+  end
+
+end
+
+
+namespace :deploy do
+  task :tomcat_start do
+   open("| echo $TOMCAT_HOME"){|io| puts io.read}
+  end
+end

@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+use strict;
+use WWW::Curl::Easy;
+my $url = 'http://www.cmuch.com/ap/index.html';
+sub curl {
+    my $url = shift;
+    my $curl = new WWW::Curl::Easy;
+    $curl -> setopt(CURLOPT_URL,$url);
+    $curl -> perform;
+#    my $err = $curl -> errbuf;
+    my $infocode = $curl -> getinfo(CURLINFO_RESPONSE_CODE);
+    system(clear);
+    return $infocode;
+}
+my $code = &curl($url);
+print $code,"\n";
+
+
+
