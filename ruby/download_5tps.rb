@@ -9,7 +9,7 @@ end
 
 re = /href="(http:\/\/pse-d\.ysx8\.net[^"]+)"/
 
-home_dir = "/opt/var/tmp/liaozhai"
+home_dir = '/opt/var/tmp/liaozhai'
 
 Dir.mkdir(home_dir) unless Dir.exists?(home_dir)
 Dir.chdir(home_dir)
@@ -17,16 +17,16 @@ Dir.chdir(home_dir)
 ts = []
 (1..128).each do |i|
   #ts << Thread.start{    
-    uri = "http://www.5tps.com/down/3117_47_1_#{"%03d" %i}.html"
-    filename = "%03d.mp3" %i
-    unless File.exists?(filename)
+    uri = "http://www.5tps.com/down/3117_47_1_#{'%03d' %i}.html"
+    filename = '%03d.mp3' %i
+    if File.exists?(filename)
+      puts "#{filename} have already downloaded!"
+    else
       s = open(uri).read
       if s =~ re
         link = $1
       end
       `wget #{link} --output-document=#{filename}`
-    else
-      puts "#{filename} have already downloaded!"
     end    
   #}
   #if i % 5 == 0
