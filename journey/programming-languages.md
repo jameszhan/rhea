@@ -1,4 +1,72 @@
 代码知多少——编程语言漫谈
+=====================
+
+程序员社区有个著名的说法：任何现代编程语言都脱胎于Smalltalk和LISP，都与这两个编程语言有着似曾相识的特性，自Smalltalk和LISP诞生以来，编程语言领域可谓大势已定了。
+
+### 程序语言历史
+* 1951 – Regional Assembly Language
+* 1952 – Autocode
+* 1954 – IPL (LISP语言的祖先)
+* 1955 – FLOW-MATIC (COBOL语言的祖先)
+* 1957 – FORTRAN (第一个编译型语言)
+* 1957 – COMTRAN (COBOL语言的祖先)
+* 1958 – LISP
+* 1958 – ALGOL 58
+* 1959 – FACT (COBOL语言的祖先)
+* 1959 – COBOL
+* 1959 – RPG
+* 1962 – APL
+* 1962 – Simula
+* 1962 – SNOBOL
+* 1963 – CPL (C语言的祖先)
+* 1964 – BASIC
+* 1964 – PL/I
+* 1966 – JOSS
+* 1967 – BCPL (C语言的祖先)
+* 1968 – Logo
+* 1969 – B (C语言的祖先)
+* 1970 – Pascal
+* 1970 – Forth
+* 1972 – C
+* 1972 – Smalltalk
+* 1972 – Prolog
+* 1973 – ML
+* 1975 – Scheme
+* 1978 – SQL
+* 1980 – C++ (既有类的C语言，更名于1983年7月)
+* 1983 – Ada
+* 1984 – Common Lisp
+* 1984 – MATLAB
+* 1985 – Eiffel
+* 1986 – Objective-C
+* 1986 – Erlang
+* 1987 – Perl
+* 1988 – Tcl
+* 1988 – Mathematica
+* 1989 – FL
+* 1990 – Haskell
+* 1991 – Python
+* 1991 – Visual Basic
+* 1993 – Ruby
+* 1993 – Lua
+* 1994 – CLOS (ANSI Common Lisp的一部分)
+* 1995 – Java
+* 1995 – Delphi (Object Pascal)
+* 1995 – JavaScript
+* 1995 – PHP
+* 1996 – WebDNA
+* 1997 – Rebol
+* 1999 – D
+* 2000 – ActionScript
+* 2001 – C#
+* 2001 – Visual Basic .NET
+* 2002 – F#
+* 2003 – Groovy
+* 2003 – Scala
+* 2007 – Clojure
+* 2009 – Go
+* 2011 – Dart
+* 2014 - Swift
 
 
 1. 弱类型(C, JavaScript) vs 强类型(Java, Python)
@@ -184,6 +252,9 @@ namespace ExtensionMethods {
 using ExtensionMethods;
 3.square
 ~~~
+
+LISP几乎可以支持任何的编程范型
+LISP-1(Scheme, Clojure) vs LISP-2(Common-LISP)，这两大家族之间主要的区别在于命名空间的工作方式。Common Lisp用不同的命名空间区分函数和变量,Scheme则不区分。
 
 编程范式
 1. OO
@@ -380,5 +451,16 @@ Clojure的优势和缺点大部分和它的力量与灵活性有关。的确,你
 3. 最后思考<br />
 在本书所介绍的全部函数式编程语言中,Haskell是最难学的语言。把重点放在monad和类型 系统上让学习曲线变得十分陡峭,不过一旦我掌握了其中一些关键概念,事情就变得容易许多, 它也成为了我学过的回报最高的语言。基于类型系统以及monad应用的优雅,总有一天,你会回过头来看看这门本书中最重要的语言。
 Haskell还扮演着另外一个角色。其方法的纯洁性和学术关注都将会提高我们对编程的认知。 下一代最好的函数式编程程序员将会从Haskell中获得许多初步经验。
+
+
+
+
+## Ruby相关
+Ruby DSL应用(Rails, ActiveRecord, Rake...)
+
+
+## 附录
+### 编程语言历史
+![programming-language-history](./images/pl-history.jpg)
 
 
