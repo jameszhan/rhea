@@ -19,10 +19,10 @@ lambda{
 
   Kernel.send(:define_method, :run){|name|
     ns_tasks = name.split(/:/)
-    if(ns_tasks.length == 2)
+    if ns_tasks.length == 2
       namespaces[ns_tasks[0].to_sym][ns_tasks[1].to_sym].call
     else
-       namespaces[:global][ns_tasks[0].to_sym].call
+      namespaces[:global][ns_tasks[0].to_sym].call
     end
     #tasks[name].call
   }
