@@ -470,10 +470,30 @@ Haskell还扮演着另外一个角色。其方法的纯洁性和学术关注都�
 * C++派是数据结构化
 * 其他（混合等...）
 
+## Go 特性
+1. 垃圾回收
+2. 支持并行处理的Goroutine
+3. Structural Subtyping(结构子类型)
 
 
 ## Ruby相关
 Ruby DSL应用(Rails, ActiveRecord, Rake...)
+
+## JAVA8十大新特性
+1. 接口的默认方法
+2. 函数式接口(@FunctionalInterface)
+3. Lambda表达式
+4. Lambda作用域
+5. Lambda访问局部变量
+6. Lambda访问对象字段与静态变量
+7. 访问接口的默认方法
+8. 方法与构造函数引用
+9. Date API
+10. Annotation注解(多重注解)
+
+
+### 源于Guava的灵感
+Predicate， Function， Supplier，Consumer，Optional，etc...
 
 
 ## 附录
