@@ -70,6 +70,7 @@
 * 2003 – Scala
 * 2007 – Clojure
 * 2009 – Go
+* 2010 - CoffeeScript
 * 2011 – Dart
 * 2014 - Swift
 
