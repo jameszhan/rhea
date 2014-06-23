@@ -28,6 +28,10 @@ if __name__ == '__main__':
     
     b2 = Base()
     print(b2.hw())
-    #print(b2.hw1()) // Not Found!  
-      
+    #print(b2.hw1()) // Not Found!
+
+    class int(int):
+        def square(self):
+            return self * self
     
+    print(int(3).square())

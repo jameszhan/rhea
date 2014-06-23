@@ -22,7 +22,21 @@ class Base(object):
         else: 
             raise AttributeError(name)
             pass
-        
+
+class Hasie(object):
+    def __init__(self, _hash):
+        self.hash = _hash
+
+    def __getattr__(self, name):
+        if name in self.hash:
+            func = lambda: self.hash[name]
+            self.__setattr__(name, func)
+            return func
+        else:
+            raise AttributeError(name)
+
+
+
 
 if __name__ == '__main__': 
     b = Base()
@@ -30,4 +44,10 @@ if __name__ == '__main__':
     print(b.hello(1))
     print(b.world('James'))    
     #print(b.a)
+
+
+    hash = {'a': 1, 'b': 2}
+    h = Hasie(hash)
+    print(h.a())
+    print(h.b())
     
