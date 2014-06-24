@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <script type="text/javascript">
+        	function eq(a, b){
+        		return a == b;
+        	}
+        	
+        	function lt(a, b){
+        		return a < b;
+        	}
+        	
+        	function gt(a, b){
+        		return a > b;
+        	}
+        	
+			function doApply(f, a){
+				return function(){
+					[].unshift.call(arguments, a);
+					return f.apply(null, arguments);
+				}
+			}
+			
+			function partial( fn /*, args...*/) {
+			  var aps = Array.prototype.slice,
+				args = aps.call( arguments, 1 );
+  
+			  return function() {
+					return fn.apply( this, args.concat( aps.call( arguments ) ) );
+			  };
+			}
+			
+			function partialRight( fn /*, args...*/) {
+			  var aps = Array.prototype.slice,
+				args = aps.call( arguments, 1 );
+  
+			  return function() {
+					return fn.apply( this, aps.call( arguments ).concat( args ) );
+			  };
+			}
+			
+			function apply(f){    
+				var args = Array.prototype.slice.call(arguments, 1);
+				return function(x){
+					var as = [].concat.apply(args, arguments);
+					return f.apply(null, as);
+				}
+			}
+			
+			function count(list, match){
+				var c = 0;
+				for (var i = 0; i < list.length; i++){
+					if (match(list[i])){
+						c++;
+					} 			
+				}
+				return c;
+			}
+			
+			console.log(count([1, 2, 2, 3, 3, 3, 5, 5, 5], partial(eq, 1)));
+			console.log(count([1, 2, 2, 3, 3, 3, 5, 5, 5], partial(eq, 3)));
+			console.log(count([1, 2, 2, 3, 3, 3, 5, 5, 5], partial(eq, 5)));
+        </script>
+        <title>DEMO</title>
+    </head>
+    <body>
+
+    </body>
+</html>

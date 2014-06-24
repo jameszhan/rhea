@@ -1,0 +1,101 @@
+<html>
+<head>
+    <script type="text/javascript">
+        Array.prototype.each = function(callback){
+            for(var i = 0; i < this.length; i++){
+                callback(i, this[i]);
+            }
+        };
+        var defer = function(){
+            var state = 'pending', resolveListeners = [], rejectListeners = [], notifyListeners = [], promise = {
+                done: function(func){
+                    resolveListeners.push(func);
+                    return this;
+                },
+                fail: function(func){
+                    rejectListeners.push(func);
+                    return this;
+                },
+                progress: function(func){
+                    notifyListeners.push(func);
+                    return this;
+                },
+                always: function(func){
+                    this.done(func).fail(func);
+                    return this;
+                },
+                then: function(succ, fail, progress){
+                    this.done(succ).fail(fail).progress(progress);
+                    return this;
+                },
+                state: function(){ return state }
+            };
+            return {
+                resolve: function(){
+                    var args = arguments;
+                    resolveListeners.each(function(i, e){
+                        e.apply(this, args);
+                    });
+                },
+                reject: function(){
+                    var args = arguments;
+                    rejectListeners.each(function(i, e){
+                        e.apply(this, args);
+                    });
+                },
+                notify: function(){
+                    var args = arguments;
+                    notifyListeners.each(function(i, e){
+                        e.apply(this, args);
+                    });
+                },
+                promise: function(){
+                    return promise;
+                }
+            };
+        };
+
+        function wait(func, time){
+            var deferred = defer();
+            var progress = 0;
+            var h = setInterval(function(){
+                progress += 100;
+                deferred.notify((progress / time * 100) + "%")
+            }, 100);
+            setTimeout(function(){
+                try {
+                    deferred.resolve(func());
+                } catch (e){
+                    deferred.reject(e);
+                }
+                clearInterval(h);
+            }, time);
+            return deferred.promise();
+        }
+
+        wait(function(){
+            return 100;
+        }, 2000).then(function(r){
+            console.log("then success: ", r);
+        }, function(r){
+            console.log("then failure: ", r);
+        }, function(p){
+            console.log("then process: ", p);
+        }).fail(function(r){
+            console.log("fail: ", r);
+        }).done(function(r){
+            console.log("done1: ", r);
+        }).done(function(r){
+            console.log("done2: ", r);
+        }).always(function(r){
+            console.log("always: ", r);
+        }).progress(function(p){
+            console.log(p);
+        });
+    </script>
+    <title>DEMO</title>
+</head>
+<body>
+
+</body>
+</html>

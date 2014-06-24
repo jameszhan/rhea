@@ -1,0 +1,51 @@
+<html>
+<head>
+    <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+        /*
+    $.when($.ajax("index.htm"), $.ajax("test.htm")).then(function(){
+        console.log("success: ", arguments);
+    }, function(){
+        console.log("failure: ", arguments);
+    }, function(){
+        console.log("progress: ", arguments);
+    });    */
+
+    function wait(func, time){
+        var defered = $.Deferred();
+        var progress = 0;
+        var h = setInterval(function(){
+            progress += 100;
+            defered.notify((progress / time * 100) + "%")
+        }, 100);
+        setTimeout(function(){
+            try {
+                defered.resolve(func());
+            } catch (e){
+                defered.reject(e);
+            }
+            clearInterval(h);
+        }, time);
+        return defered.promise();
+    }
+
+    wait(function(){
+        return 100;
+    }, 5000).done(function(r){
+        console.log("done1: " + r);
+    }).done(function(r){
+        console.log("done2: " + r);
+    }).done(function(r){
+        console.log("done3: " + r);
+    }).always(function(r){
+        console.log("always: " + r);
+    }).progress(function(p){
+        console.log(p);
+    });
+    </script>
+    <title>DEMO</title>
+</head>
+<body>
+
+</body>
+</html>

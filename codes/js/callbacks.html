@@ -1,0 +1,193 @@
+<html>
+<head>
+    <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+        jQuery.Callbacks1 = function( options ) {
+            var memory, fired, firing, firingStart, firingLength, firingIndex,
+                list = [],
+                stack = !options.once && [],
+                fire = function( data ) {
+                    memory = options.memory && data;
+                    fired = true;
+                    firingIndex = firingStart || 0;
+                    firingStart = 0;
+                    firingLength = list.length;
+                    firing = true;
+                    for ( ; list && firingIndex < firingLength; firingIndex++ ) {
+                        if ( list[ firingIndex ].apply( data[ 0 ], data[ 1 ] ) === false && options.stopOnFalse ) {
+                            memory = false; // To prevent further calls using add
+                            break;
+                        }
+                    }
+                    firing = false;
+                    if ( list ) {
+                        if ( stack ) {
+                            if ( stack.length ) {
+                                fire( stack.shift() );
+                            }
+                        } else if ( memory ) {
+                            list = [];
+                        } else {
+                            self.disable();
+                        }
+                    }
+                },
+                self = {
+                    add: function() {
+                        if ( list ) {
+                            // First, we save the current length
+                            var start = list.length;
+                            jQuery.each(arguments, function(_, arg){
+                                if ("function" == jQuery.type(arg)) {
+                                    list.push(arg);
+                                }
+                            });
+                            /*
+                            (function add( args ) {
+                                jQuery.each( args, function( _, arg ) {
+                                    var type = jQuery.type( arg );
+                                    if ( type === "function" ) {
+                                        if ( !options.unique || !self.has( arg ) ) {
+                                            list.push( arg );
+                                        }
+                                    } else if ( arg && arg.length && type !== "string" ) {
+                                        // Inspect recursively
+                                        add( arg );
+                                    }
+                                });
+                            })( arguments );
+                            */
+                            // Do we need to add the callbacks to the current firing batch?
+                            if ( firing ) {
+                                firingLength = list.length;
+                                // With memory, if we're not firing then we should call right away
+                            } else if ( memory ) {
+                                firingStart = start;
+                                fire( memory );
+                            }
+                        }
+                        return this;
+                    },
+                    remove: function() {
+                        if ( list ) {
+                            jQuery.each( arguments, function( _, arg ) {
+                                var index;
+                                while ( ( index = jQuery.inArray( arg, list, index ) ) > -1 ) {
+                                    list.splice( index, 1 );
+                                    // Handle firing indexes
+                                    if ( firing ) {
+                                        if ( index <= firingLength ) {
+                                            firingLength--;
+                                        }
+                                        if ( index <= firingIndex ) {
+                                            firingIndex--;
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        return this;
+                    },
+                    // Check if a given callback is in the list.
+                    // If no argument is given, return whether or not list has callbacks attached.
+                    has: function( fn ) {
+                        return fn ? jQuery.inArray( fn, list ) > -1 : !!( list && list.length );
+                    },
+                    // Remove all callbacks from the list
+                    empty: function() {
+                        list = [];
+                        firingLength = 0;
+                        return this;
+                    },
+                    // Have the list do nothing anymore
+                    disable: function() {
+                        list = stack = memory = undefined;
+                        return this;
+                    },
+                    // Is it disabled?
+                    disabled: function() {
+                        return !list;
+                    },
+                    // Lock the list in its current state
+                    lock: function() {
+                        stack = undefined;
+                        if ( !memory ) {
+                            self.disable();
+                        }
+                        return this;
+                    },
+                    // Is it locked?
+                    locked: function() {
+                        return !stack;
+                    },
+                    // Call all callbacks with the given context and arguments
+                    fireWith: function( context, args ) {
+                        if ( list && ( !fired || stack ) ) {
+                            args = args || [];
+                            args = [ context, args.slice ? args.slice() : args ];
+                            if ( firing ) {
+                                stack.push( args );
+                            } else {
+                                fire( args );
+                            }
+                        }
+                        return this;
+                    },
+                    // Call all the callbacks with the given arguments
+                    fire: function() {
+                        self.fireWith( this, arguments );
+                        return this;
+                    },
+                    // To know if the callbacks have already been called at least once
+                    fired: function() {
+                        return !!fired;
+                    }
+                };
+
+            return self;
+        };
+
+        jQuery(function($){
+            $(document).on("click", "button", function(e){
+                var opts = $(this).data("options");
+                var options = {};
+                if (opts == "once") {
+                    options.once = true;
+                } else if (opts == "memory"){
+                    options.memory = true;
+                } else {
+                    options.once = true;
+                    options.memory = true;
+                }
+                console.log(options);
+                var callbacks = $.Callbacks1(options);
+
+                callbacks.add(function(value) {
+                    console.log("before: ", arguments, this);
+                });
+                callbacks.fire("xyz...");
+                callbacks.fireWith("Object", ["Good!", "Paramter"]);
+                callbacks.add(function(){
+                    console.log("inner: ", arguments, this);
+                });
+                //callbacks.fireWith("hello");
+                callbacks.add(function(value) {
+                    console.log("after 1: ", arguments, this);
+                });
+                callbacks.add(function(value) {
+                    console.log("after 2: ", arguments, this);
+                });
+                console.log("========================");
+                //callbacks.fire("world");
+                console.log("\n\n\n\n\n\n\n");
+            });
+        });
+    </script>
+    <title>DEMO</title>
+</head>
+<body>
+<button data-options='once'>Once</button>
+<button data-options='memory'>Memory</button>
+<button data-options='once|memory'>Once Memory</button>
+</body>
+</html>

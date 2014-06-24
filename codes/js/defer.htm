@@ -1,0 +1,86 @@
+<html>
+<head>
+    <script type="text/javascript">
+        var defer = function(){
+            var state = 'pending', tuples = [
+                ['resolve', 'done', [], 'resolved'],
+                ['reject', 'fail', [], 'rejected'],
+                ['notify', 'progress', []]
+            ], deferred = {}, promise = {
+                state: function(){ return state },
+                always: function(func){
+                    this.done(func).fail(func);
+                    return this;
+                },
+                then: function(succ, fail, progress){
+                    this.done(succ).fail(fail).progress(progress);
+                    return this;
+                }
+            };
+            for (var i = 0; i < tuples.length; i++){
+                (function(tuple){
+                    promise[tuple[1]] = function(func){
+                        func && tuple[2].push(func);
+                        return this;
+                    };
+                    deferred[tuple[0]] = function(){
+                        for (var i = 0; i < tuple[2].length; i++) {
+                            tuple[2][i].apply(this, arguments);
+                        }
+                        if (tuple[3]){
+                            state = tuple[3];
+                        }
+                        return this;
+                    };
+                })(tuples[i]);
+            }
+            deferred.promise = function(){
+                return promise;
+            };
+            return deferred;
+        };
+
+        function wait(func, time){
+            var deferred = defer();
+            var progress = 0;
+            var h = setInterval(function(){
+                progress += 100;
+                deferred.notify((progress / time * 100) + "%")
+            }, 100);
+            setTimeout(function(){
+                try {
+                    deferred.resolve(func());
+                } catch (e){
+                    deferred.reject(e);
+                }
+                clearInterval(h);
+            }, time);
+            return deferred.promise();
+        }
+
+        wait(function(){
+            return 100;
+        }, 2000).then(function(r){
+            console.log("then success: ", r);
+        }, function(r){
+            console.log("then failure: ", r);
+        }, function(p){
+            console.log("then process: ", p);
+        }).done(function(r){
+            console.log("done1: ", r);
+        }).done(function(r){
+            console.log("done2: ", r);
+        }).done(function(r){
+            console.log("done3: ", r);
+        }).always(function(r){
+            console.log("always: ", r);
+        }).progress(function(p){
+            console.log(p);
+        });
+    </script>
+    <title>DEMO</title>
+</head>
+<body>
+
+</body>
+</html>

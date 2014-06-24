@@ -1,0 +1,50 @@
+<html>
+    <head>
+		<script type="text/javascript">			
+			function partial( fn /*, args...*/) {
+			  var aps = Array.prototype.slice,
+				args = aps.call(arguments, 1);
+  
+			  return function() {
+					return fn.apply(this, args.concat(aps.call(arguments)));
+			  };
+			}
+			
+			function partialRight( fn /*, args...*/) {
+			  var aps = Array.prototype.slice,
+				args = aps.call(arguments, 1);
+  
+			  return function() {
+					return fn.apply(this, aps.call(arguments).concat(args));
+			  };
+			}
+			
+			function curry(/* n,*/ fn /*, args...*/) {
+			  var n,
+				aps = Array.prototype.slice,
+				orig_args = aps.call(arguments, 1);
+  
+			  if (typeof fn === 'number') {
+					n = fn;
+					fn = orig_args.shift();
+			  } else {
+					n = fn.length;
+			  }
+  
+			  return function() {
+					var args = orig_args.concat(aps.call(arguments));	
+					return args.length < n ? curry.apply(this, [n, fn].concat(args)) : fn.apply(this, args);
+			  };
+			}
+			
+			function cube(l, w, h) {
+				return l * w * h;
+			}
+			
+		</script>
+		<title>DEMO</title>
+    </head>
+    <body>
+
+    </body>
+</html>
