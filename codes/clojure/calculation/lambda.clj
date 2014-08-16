@@ -1,5 +1,9 @@
 ;;λ演算
 ;;
+;;  <expression> := <name> | <function> | <application>
+;;  <function> := λ<name>.<expression>
+;;  <application> := <expression><expression>
+;;
 ;;α--变换
 ;;α变换规则表达的是，被绑定变量的名称是不重要的。
 ;;α变换规则陈述的是，若v与w均为变量，E是一个lambda表达式，同时E[v/w]是指把表达式E中的所有的v的自由出现都替换成w，那么在w不是E中的一个自由出现，且如果w替换了v，w不会被E中的λ绑定的情况下，有
@@ -56,7 +60,6 @@
 ;(def three (fn [f x] (f (f (f x)))))
 (defn three [f x] (f (f (f x))))
 
-
 (defn plus [m n] (fn [f x] (m f (n f x))))
 ;(defn mult [m n] (fn [f x] (n #(m f %) x)))
 (defn mult [m n] (fn [f x] (n (partial m f) x)))
@@ -111,5 +114,30 @@
 
 (println (IF TRUE 3 6))
 (println (IF FALSE "A" "B"))
+
+
+(println "\nPairs")
+;;Pairs
+(defn cons [x y] (fn [m] (IF m x y)))
+
+(defn car [z] (z TRUE))
+(defn cdr [z] (z FALSE))
+
+(def a (cons 1 2))
+(println (car a))
+(println (cdr a))
+
+(def b (cons 1 a))
+(println (car b))
+(println (cdr b))
+(println (car (cdr b)))
+(println (cdr (cdr b)))
+
+(def c (cons (cons 1 2) (cons 3 4)))
+
+(println "------------------")
+(println (car c))
+(println (car (car c)))
+
 
 
