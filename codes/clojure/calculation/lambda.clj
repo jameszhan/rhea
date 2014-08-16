@@ -12,9 +12,41 @@
 ;;η--变换
 ;;η变换表达的是外延性的概念，在这里外延性指的是，两个函数对于所有的参数得到的结果一致，当且仅当它们是同一个函数，η变换可以令 λx.fx和f相互交换，只要x不是f中的自由出现。
 ;;
+;;Arithmetic in lambda calculus
+;;
+;;  0 := λf.λx.x
+;;  1 := λf.λx.f x
+;;  2 := λf.λx.f (f x)
+;;  3 := λf.λx.f (f (f x))
+;;
+;;  SUCC  := λn.λf.λx.f (n f x)
+;;  PLUS  := λm.λn.m SUCC n
+;;  PLUS  := λm.λn.λf.λx.m f (n f x)
+;;  MULT  := λm.λn.m (PLUS n) 0
+;;  MULT  := λm.λn.λf.m (n f)
+;;  PRED  := λn.λf.λx.n (λg.λh.h (g f)) (λu.x) (λu.u)
+;;  SUB   := λm.λn.n PRED m
+;;  POW   := λb.λe.e b
+;;
+;;Logic and predicates
+;;
+;;  TRUE  := λx.λy.x
+;;  FALSE := λx.λy.y
+;;  AND   := λp.λq.p q p
+;;  OR    := λp.λq.p p q
+;;  NOT   := λp.λa.λb.p b a
+;;  IFTHENELSE := λp.λa.λb.p a b
+;;
+;;Pairs
+;;  PAIR := λx.λy.λf.f x y
+;;  FIRST := λp.p TRUE
+;;  SECOND := λp.p FALSE
+;;  NIL := λx.TRUE
+;;  NULL := λp.p (λx.λy.FALSE)
+;;
 
-(def zero (fn [f x] x))
-;(defn zero [f x] x)
+;(def zero (fn [f x] x))
+(defn zero [f x] x)
 (defn succ [n] (fn [f x] (f (n f x))))
 
 ;(def one (fn [f x] (f x)))
@@ -24,11 +56,13 @@
 ;(def three (fn [f x] (f (f (f x)))))
 (defn three [f x] (f (f (f x))))
 
+
 (defn plus [m n] (fn [f x] (m f (n f x))))
 ;(defn mult [m n] (fn [f x] (n #(m f %) x)))
 (defn mult [m n] (fn [f x] (n (partial m f) x)))
 
-(defn church->int [n] (n #(inc %) 0))
+;(defn church->int [n] (n #(inc %) 0))
+(defn church->int [n] (n inc 0))
 
 (println (church->int zero))
 (println (church->int one))
@@ -45,6 +79,7 @@
 (println (church->int (plus one one)))
 (println (church->int (plus one two)))
 (println (church->int (plus three three)))
+(println (church->int (plus three (plus three three))))
 
 (println "MUL")
 (println (church->int (mult zero three)))
@@ -52,3 +87,29 @@
 (println (church->int (mult one three)))
 (println (church->int (mult three two)))
 (println (church->int (mult three (succ two))))
+
+
+(println "\nEVEN")
+(defn church->even [n] (n #(+ % 2) 0))
+(println (church->even zero))
+(println (church->even (succ zero)))
+(println (church->even (plus (succ zero) (succ (succ zero)))))
+(println (church->even (mult three three)))
+
+(println "\nEGATIVE NUMBER")
+(defn church->neg [n] (n dec 0))
+(println (church->neg zero))
+(println (church->neg (succ zero)))
+(println (church->neg (plus (succ zero) (succ (succ zero)))))
+(println (church->neg (mult three three)))
+
+;;Logic and predicates
+
+(defn TRUE [x y] x)
+(defn FALSE [x y] y)
+(defn IF [p a b] (p a b))
+
+(println (IF TRUE 3 6))
+(println (IF FALSE "A" "B"))
+
+
