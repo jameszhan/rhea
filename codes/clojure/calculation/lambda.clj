@@ -17,15 +17,16 @@
 ;(defn zero [f x] x)
 (defn succ [n] (fn [f x] (f (n f x))))
 
-(def one (fn [f x] (f x)))
-;(defn one [f x] (f x))
-(def two (fn [f x] (f (f x))))
-;(defn two [f x] (f (f x)))
-(def three (fn [f x] (f (f (f x)))))
-;(defn three [f x] (f (f (f x))))
+;(def one (fn [f x] (f x)))
+(defn one [f x] (f x))
+;(def two (fn [f x] (f (f x))))
+(defn two [f x] (f (f x)))
+;(def three (fn [f x] (f (f (f x)))))
+(defn three [f x] (f (f (f x))))
 
 (defn plus [m n] (fn [f x] (m f (n f x))))
-(defn mult [m n] (fn [f x] (n (m f x) x)))
+;(defn mult [m n] (fn [f x] (n #(m f %) x)))
+(defn mult [m n] (fn [f x] (n (partial m f) x)))
 
 (defn church->int [n] (n #(inc %) 0))
 

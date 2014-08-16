@@ -18,10 +18,10 @@
 (def three (fn [f] (fn [x] (f (f (f x))))))
 
 (def plus (fn [m n] (fn [f] (fn [x] ((m f) ((n f) x))))))
-(def mult (fn [m n] (fn [f] (n (m f)))))
+;(def mult (fn [m n] (fn [f] (n (m f)))))
+(def mult (fn [m n] (fn [f] (fn [x] ((n (m f)) x)))))
 
 (def church->int (fn [n] ((n (fn [x] (inc x))) 0)))
-
 
 (println (church->int zero))
 (println (church->int one))

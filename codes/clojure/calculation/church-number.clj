@@ -19,6 +19,7 @@
 
 (defn plus [m n] (fn [f] (fn [x] ((m f) ((n f) x)))))
 (defn mult [m n] (fn [f] (n (m f))))
+;(defn mult [m n] (fn [f] (fn [x] ((n (m f)) x))))
 
 (defn church->int [n] ((n (fn [x] (inc x))) 0))
 
