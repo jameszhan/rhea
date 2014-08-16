@@ -32,4 +32,4 @@
 
 (doto panel (.setFocusable true)(.addKeyListener panel))
 (doto (JFrame. "Snake")(.add panel)(.setSize 800 600)(.setVisible true))
-(.start (Timer. 75 panel))
+(.start (Timer. 200 panel))

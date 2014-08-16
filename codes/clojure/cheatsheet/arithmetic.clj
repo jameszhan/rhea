@@ -1,0 +1,18 @@
+;;arithmetic
+
+(println (+ 1 2 3))
+(println (+' Long/MAX_VALUE Long/MAX_VALUE))
+(println (- 1 2))
+(println (-' Long/MIN_VALUE Long/MAX_VALUE))
+(println (* 1 2 3))
+(println (*' Long/MAX_VALUE Long/MAX_VALUE))
+(println (/ 1 Long/MAX_VALUE))
+(println (quot 1 Long/MAX_VALUE))
+(println (rem 10 8))
+(println (mod 10 8))
+(println (rem -10 8))
+(println (mod -10 8))
+(println (inc 1))
+(println (dec 2))
+(println (max 1 2 3 3 2 1))
+(println (min 1 2 3 3 2 1))
