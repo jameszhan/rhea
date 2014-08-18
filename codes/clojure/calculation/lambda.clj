@@ -49,23 +49,40 @@
 ;;  NULL := λp.p (λx.λy.FALSE)
 ;;
 
-;(def zero (fn [f x] x))
-(defn zero [f x] x)
-(defn succ [n] (fn [f x] (f (n f x))))
+(defn zero [f] (fn [x] x))
+(defn succ [n] (fn [f] (fn [x] (f ((n f) x)))))
 
-;(def one (fn [f x] (f x)))
-(defn one [f x] (f x))
-;(def two (fn [f x] (f (f x))))
-(defn two [f x] (f (f x)))
-;(def three (fn [f x] (f (f (f x)))))
-(defn three [f x] (f (f (f x))))
+;;
+;; one = (succ zero)
+;;      = (fn [f] (fn [x] (f (((zero) f) x))))
+;;      = (fn [f] (fn [x] (f ((fn [x] x) x))))
+;;      = (fn [f] (fn [x] (f x)))
+;;
+;; two = (succ one)
+;;     = (fn [f] (fn [x] (f (((one) f) x))))
+;;     = (fn [f] (fn [x] (f ((fn [x] (f x)) x))))
+;;     = (fn [f] (fn [x] (f (f x))))
+;;
 
-(defn plus [m n] (fn [f x] (m f (n f x))))
-;(defn mult [m n] (fn [f x] (n #(m f %) x)))
-(defn mult [m n] (fn [f x] (n (partial m f) x)))
+(defn one [f] (fn [x] (f x)))
+(defn two [f] (fn [x] (f (f x))))
+(defn three [f] (fn [x] (f (f (f x)))))
 
-;(defn church->int [n] (n #(inc %) 0))
-(defn church->int [n] (n inc 0))
+(defn plus [m n] (fn [f] (fn [x] ((m f) ((n f) x)))))
+(defn mult [m n] (fn [f] (n (m f))))
+;(defn mult [m n] (fn [f] (fn [x] ((n (m f)) x))))
+(defn exp [a n] (n a))
+
+(defn pred [n]
+  (fn [f]
+    (fn [x]
+      (((n (fn [g] (fn [h] (h (g f)))))
+         (fn [u] x))
+        (fn [u] u)))))
+
+(defn sub [n m] ((m pred) n))
+
+(defn church->int [n] ((n (fn [x] (inc x))) 0))
 
 (println (church->int zero))
 (println (church->int one))
@@ -82,7 +99,6 @@
 (println (church->int (plus one one)))
 (println (church->int (plus one two)))
 (println (church->int (plus three three)))
-(println (church->int (plus three (plus three three))))
 
 (println "MUL")
 (println (church->int (mult zero three)))
@@ -91,23 +107,44 @@
 (println (church->int (mult three two)))
 (println (church->int (mult three (succ two))))
 
+(println "EXP")
+(println (church->int (exp zero zero)))
+(println (church->int (exp one zero)))
+(println (church->int (exp two zero)))
+(println (church->int (exp two three)))
+(println (church->int (exp three two)))
 
-(println "\nEVEN")
-(defn church->even [n] (n #(+ % 2) 0))
+(println "PRED")
+(println (church->int (pred zero)))
+(println (church->int (pred one)))
+(println (church->int (pred two)))
+(println (church->int (pred three)))
+(println (church->int (pred (succ three))))
+
+(println "SUB")
+(println (church->int (sub zero zero)))
+(println (church->int (sub two two)))
+(println (church->int (sub two one)))
+(println (church->int (sub three one)))
+(println (church->int (sub (succ three) one)))
+
+
+(println "\nEVEN RULES")
+(defn church->even [n] ((n #(+ % 2)) 0))
 (println (church->even zero))
 (println (church->even (succ zero)))
 (println (church->even (plus (succ zero) (succ (succ zero)))))
 (println (church->even (mult three three)))
 
 (println "\nEGATIVE NUMBER")
-(defn church->neg [n] (n dec 0))
+(defn church->neg [n] ((n dec) 0))
 (println (church->neg zero))
 (println (church->neg (succ zero)))
 (println (church->neg (plus (succ zero) (succ (succ zero)))))
 (println (church->neg (mult three three)))
 
 ;;Logic and predicates
-
+(println "\nLogic and predicates")
 (defn TRUE [x y] x)
 (defn FALSE [x y] y)
 (defn IF [p a b] (p a b))
@@ -116,8 +153,8 @@
 (println (IF FALSE "A" "B"))
 
 
-(println "\nPairs")
 ;;Pairs
+(println "\nPairs")
 (defn cons [x y] (fn [m] (IF m x y)))
 
 (defn car [z] (z TRUE))
@@ -134,10 +171,7 @@
 (println (cdr (cdr b)))
 
 (def c (cons (cons 1 2) (cons 3 4)))
-
-(println "------------------")
 (println (car c))
 (println (car (car c)))
-
 
 
