@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<style type="text/css">
+.code{
+	background:#CFCFCF;
+	color:#996633;
+	font-style:italic;
+	border:thin solid #99CC00;
+	padding:20px;
+	margin:20px;
+	height:50px;
+	width:200px;
+	z-index:1000;
+}
+</style>
+<script type="text/javascript">
+if(!window.$){
+	var $ = function(id){
+		return typeof id === 'string' ? document.getElementById(id) : id;
+	}
+}
+if(!window.log){
+	var log = function(msg){
+		document.writeln(msg);
+	}
+}
+
+function bind(obj, type, fn, capture){
+	if(obj.addEventListener){
+		obj.addEventListener(type, fn, capture || false);
+	} else if(obj.attachEvent){
+		obj.attachEvent('on' + type, fn);	
+	}
+}
+
+window.onload = function(){
+		
+	bind($('addrowbutton'), 'click', function(){
+		var tb = $('table');
+		if(tb.hasChildNodes()){
+			buildTable(tb, [3, 'Apple', 'Technology'], [4, 'China', 'Country']);			
+		}else{
+			buildTable(tb, ['id', 'name', 'class'], [1, 'James', 'Person'], [2, 'Google', 'Internet']);
+		}		
+	});
+	
+
+	bind($('setstylebutton'), 'click', function(){
+		var el = $('stylespan');
+		el.setAttribute('style','color:#ff3300; font-weight:bold');
+		el.style.cssText = 'font-weight:bold; color:#ff3300'; 		
+	});
+	
+	
+	bind($('setclassbutton'), 'click', function(){
+		var el = $('classcode');	
+		el.setAttribute('class', 'code');
+		el.setAttribute('className', 'code');	
+	});
+	
+	bind($('addinputbutton'), 'click', function(){
+		var f = $('myform');			
+		f.appendChild(input('text', 'TextElement'));	
+		f.appendChild(input('button', 'Button'));
+	});
+	
+	bind($('addactionbutton'), 'click', function(){
+		var f = $('myform');			
+		var button = input('button', 'Action');
+		//button.setAttribute('onclick','dealClick()'); //IE不支持用该方法增加事件处理程序
+		button.onclick = function(){
+			alert('You click me.');
+		}
+		f.appendChild(button);
+	});
+	
+	bind($('addradiobutton'), 'click', function(){
+		var f = $('myform');			
+		var r = radio('radio', "checked");	
+		f.appendChild(r);
+	});
+	
+	
+	function radio(name, checked){
+		if(document.uniqueID){//IE
+			var r = document.createElement('<input type="radio" name="' + name + '" value="" checked="' + checked + '">');
+		} else{//Standards Compliant
+			var r = input('radio', '');
+			r.setAttribute('checked', checked);
+			r.setAttribute('name', name);
+		}
+		return r;		
+	}
+	
+	function input(type, value){
+		var i = document.createElement('input');
+		i.setAttribute('type', type);
+		i.setAttribute('value', value);
+		return i;
+	}
+}
+
+
+var buildTable = function(){
+	function row(){
+		var r = document.createElement('tr');					
+		for(var i = 0; i < arguments.length; i++){
+			r.appendChild(cell(arguments[i]));
+		}
+		return r;
+	}
+	
+	function cell(text){
+		var c = document.createElement('td');
+		var tn = document.createTextNode(text);
+		c.appendChild(tn);
+		return c;
+	}
+	
+	return function(t){
+		var args = [].slice.call(arguments, 1);
+		for(var i = 0; i < args.length; i++){	
+			t.appendChild(row.apply(window, args[i]));
+		}		
+	}
+}();
+
+</script>
+<title>开发跨浏览器的JavaScript</title>
+</head>
+
+<body>
+
+<button id="addrowbutton">向表格中追加行</button>
+<table border="1" width="360" height="150">
+	<tbody id="table"></tbody>
+    <!--IE允许将tr元素增加到tbody元素,而不是直接加到table元素,并且这种方法在所有当前的浏览器上都能使用.-->	
+</table>
+
+<br />
+<button id="setstylebutton">通过JavaScript设置元素的样式</button>
+<br />
+<!--可以通过JavaScript使用元素的setAttribute方法设置元素的样式.除了IE,这种方法在当前其他浏览器上都是行的通的.对于IE,解决方法是使用元素style对象的cssText属性来设置所需要的样式,尽管这个属性不是标准的,但得到了广泛的支持,这种方法在IE和大多数其他浏览器上都能很好地工作,只有Opera除外.为了让代码在所有当前浏览器上都可以移植,可以同时使用这两种方法,详细见实例-->
+<span id="stylespan">^_^,看看效果怎么样</span>
+<br />
+<button id="setclassbutton">设置元素的Class属性</button>
+<br />
+<!--与设置元素内联样式类似,通过JavaScript动态地设置元素的class属性时也存在一些特异性.IE是当前浏览器中的一个异类,使用Firefox和Safari之类的浏览器时,可以使用元素的setAttribute方法来设置元素的class属性,奇怪的是,如果使用setAttribute方法,并指定属性名为class,IE并不会设置元素的class属性,相反,只使用setAttribute方法时IE会自己识别className属性.当前大多数浏览器都会使用class属性名而忽略className,IE则正好相反-->
+<div id="classcode">设置元素的Class属性</div>
+<br />
+<form id="myform">
+
+</form>
+
+<button id="addinputbutton">创建输入元素</button>
+<br />
+<!--在把新创建的输入元素增加到其父元素中,必须注意document.createElement和setAttribute语句的顺序.在某些浏览器中,只有创建了元素,而且正确地设置了type属性时,才会把新创建的元素增加到其父元素中.为了避免奇怪的行为,要确保创建输入元素后设置其所有属性,特别是type属性,然后再把它增加到父元素中-->
+<button id="addactionbutton">向输入元素增加事件处理程序</button>
+<br />
+<!--设置元素的事件处理程序的标准做法是使用元素的setAttribute方法,它以事件名作为属性名,并把函数处理程序作为属性值,除了IE,这种方法在所有当前浏览器都能工作.如果在IE中使用JavaScript设置元素的事件处理程序,必须对元素使用点记法来引用所需的事件处理程序,并把它赋为匿名函数,这个匿名函数要调用所需的事件处理程序.幸运的是,这种技术得到了IE和所有其他当前浏览器的支持-->
+<button id="addradiobutton">创建单选按钮</button>
+<br />
+<!--IE中创建单选按钮的方法与其他浏览器所用的方法大相径庭.要克服这个限制,就需要使用某种浏览器嗅探(browser-sniffing)机制,使得在创建单选按钮时脚本就能知道使用哪个方法.幸运的是,你不用检查大量不同的浏览器,假设只使用现代浏览器,脚本只需在IE和其他浏览器间进行区分就够了-->
+
+</body>
+</html>

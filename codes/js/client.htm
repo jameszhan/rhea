@@ -1,0 +1,1466 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<img src="client.jpg" />
+<ol>
+<li>Window 对象
+<p>
+Window 对象是浏览器脚本执行引擎的全局对象，它的属性和方法众多，我们先看一下它的方法和属性列表，不要被它吓到，其实常用的也就那么几个，后面我会专门有介绍，对于一些不太常用，需要的时侯可以回头来再看这个表。<br />
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">closed</td>
+<td style="background-color:#FFFFFF;">一个只读的布尔值,声明了窗口是否已经关闭。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">defaultStatus</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了显示在状态栏中的默认消息。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">document</td>
+<td style="background-color:#FFFFFF;">对描述窗口和框架中含有的文档的Document对象的只读引用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">frames</td>
+<td style="background-color:#FFFFFF;">Window对象的数组,每个Window对象在窗口中含有一个框架。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">history</td>
+<td style="background-color:#FFFFFF;">对窗口或框架的History对象的只读引用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">length</td>
+<td style="background-color:#FFFFFF;">窗口或框架包含的框架个数,也是数组frames[]中的元素数。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">location</td>
+<td style="background-color:#FFFFFF;">用于窗口或框架的Location对象。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">Math</td>
+<td style="background-color:#FFFFFF;">对一个对象的引用,该对象含有各种算术函数和常量。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">name</td>
+<td style="background-color:#FFFFFF;">一个字符串,存放了窗口的名字。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">navigator</td>
+<td style="background-color:#FFFFFF;">对Navigator对象的只读引用,提供Web浏览器的版本信息和配置信息。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">opener</td>
+<td style="background-color:#FFFFFF;">一个可读可写的属性,是对一个Window对象的引用,该对象含有调用open()方法的脚本以打开顶级浏览器窗口的脚本,
+只有表示顶层窗口的Window对象的opener属性才有效,表示框架的Window对象的opener属性无效。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">parent</td>
+<td style="background-color:#FFFFFF;">对一个Window对象的只读引用,这个Window对象包含当前的窗口或框架。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">screen</td>
+<td style="background-color:#FFFFFF;">一个Screen对象,由浏览器中所有窗口共享。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">self</td>
+<td style="background-color:#FFFFFF;">对窗口自身的只读引用,等价于window属性。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">status</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了浏览器状态栏中的当前内容。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">top</td>
+<td style="background-color:#FFFFFF;">对一个顶级窗口的只读引用,顶级窗口包含了这个窗口。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">window</td>
+<td style="background-color:#FFFFFF;">window对象等价于self属性,它包含了对窗口自身的引用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">innerHeight</td>
+<td style="background-color:#FFFFFF;">可读可写的属性,声明了窗口的文档显示区高度,以象素计, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">innerWidth</td>
+<td style="background-color:#FFFFFF;">可读可写的属性,声明了窗口的文档显示区宽度,以象素计, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">java</td>
+<td style="background-color:#FFFFFF;">对一个JavaPackage对象的引用,该对象是构成Java语言核心java.*包的包名层次的顶层包, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">locationbar.visible</td>
+<td style="background-color:#FFFFFF;">一个只读布尔值,声明窗口是否显示地址栏, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">menubar.visible</td>
+<td style="background-color:#FFFFFF;">一个只读布尔值,声明窗口是否显示菜单栏, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">outerHeight</td>
+<td style="background-color:#FFFFFF;">可读可写的属性,声明了整个窗口的高度,以象素计, Firefox, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">outerWidth</td>
+<td style="background-color:#FFFFFF;">可读可写的属性,声明了整个窗口的宽度,以象素计, Firefox, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">pageXOffset</td>
+<td style="background-color:#FFFFFF;">只读的整数,声明了当前文档向右滚动过的象素数, Firefox, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">pageYOffset</td>
+<td style="background-color:#FFFFFF;">只读的整数,声明了当前文档向下滚动过的象素数, Firefox, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">screenX</td>
+<td style="background-color:#FFFFFF;">只读整数,声明了窗口左上角在屏幕的X坐标, Firefox, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">screenY</td>
+<td style="background-color:#FFFFFF;">只读整数,声明了窗口左上角在屏幕的Y坐标, Firefox, NS 支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">Packages</td>
+<td style="background-color:#FFFFFF;">对一个JavaPackage对象的引用,该对象表示Java包名层次的顶层包，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">personalbar.visible</td>
+<td style="background-color:#FFFFFF;">一个只读布尔值,声明窗口是否显示书签的个人栏，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">scrollbars.visible</td>
+<td style="background-color:#FFFFFF;">一个只读布尔值,声明窗口窗口的滚动条是否可见，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">toolbars.visible</td>
+<td style="background-color:#FFFFFF;">一个只读布尔值,声明窗口窗口的工具栏是否可见，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">clientInformation</td>
+<td style="background-color:#FFFFFF;">IE中与navigator属性同义，IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">event</td>
+<td style="background-color:#FFFFFF;">一个Event对象,该对象存放窗口Window中最近发生事件的详细信息，IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">alert()</td>
+<td style="background-color:#FFFFFF;">在对话框框中显示简单的消息。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">confirm()</td>
+<td style="background-color:#FFFFFF;">用对话框询问一个回答为是或否的问题。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">prompt()</td>
+<td style="background-color:#FFFFFF;">用对话框请求输入一个简单的字符串。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">setInterval()</td>
+<td style="background-color:#FFFFFF;">周期性执行指定的代码。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">clearInterval()</td>
+<td style="background-color:#FFFFFF;">取消周期性执行的代码。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">setTimeout()</td>
+<td style="background-color:#FFFFFF;">在经过指定的时间之后执行代码。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">clearTimeout()</td>
+<td style="background-color:#FFFFFF;">取消挂起超时操作。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">focus()</td>
+<td style="background-color:#FFFFFF;">把键盘焦点赋予顶层浏览器窗口。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">blur()</td>
+<td style="background-color:#FFFFFF;">把键盘焦点从顶层窗口中移走。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">open()</td>
+<td style="background-color:#FFFFFF;">创建并打开一个新窗口。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">close()</td>
+<td style="background-color:#FFFFFF;">关闭窗口。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">moveBy()</td>
+<td style="background-color:#FFFFFF;">把窗口移动一个相对的数量。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">moveTo()</td>
+<td style="background-color:#FFFFFF;">把窗口移动到一个绝对的位置。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">resizeBy()</td>
+<td style="background-color:#FFFFFF;">把窗口大小调整指定的数量。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">resizeTo()</td>
+<td style="background-color:#FFFFFF;">把窗口大小调整到指定的大小。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">scrollBy()</td>
+<td style="background-color:#FFFFFF;">把窗口滚动指定的数量。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">scrollTo()</td>
+<td style="background-color:#FFFFFF;">把窗口滚动到指定的位置。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">scroll()</td>
+<td style="background-color:#FFFFFF;">滚动窗口中显示的文本。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">print()</td>
+<td style="background-color:#FFFFFF;">模拟对浏览器Print按钮的点击。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">back()</td>
+<td style="background-color:#FFFFFF;">其行为和用户点击了Back按钮一样, Firefox，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">captureEvents()</td>
+<td style="background-color:#FFFFFF;">指定直接发送给该窗口的事件类型, Firefox，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">forward()</td>
+<td style="background-color:#FFFFFF;">其行为和用户点击了Forward按钮一样, Firefox，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">handleEvent()</td>
+<td style="background-color:#FFFFFF;">为给定的Event对象调用合适的事件处理程序, Firefox，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">home()</td>
+<td style="background-color:#FFFFFF;">显示浏览器的主页，Firefox，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">releaseEvents()</td>
+<td style="background-color:#FFFFFF;">指定不再捕捉的事件类型, Firefox，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">routeEvent()</td>
+<td style="background-color:#FFFFFF;">将Event对象传递给下一个对它感兴趣的对象的合适的事件处理程序, Firefox，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">stop()</td>
+<td style="background-color:#FFFFFF;">模拟对浏览器Stop按钮的点击, Firefox，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">navigate()</td>
+<td style="background-color:#FFFFFF;">装载并显示出指定的URL, IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onblur</td>
+<td style="background-color:#FFFFFF;">当窗口失去焦点时调用该事件的处理程序。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onerror</td>
+<td style="background-color:#FFFFFF;">当发生JavaScript错误时调用该事件的处理程序。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onfocus</td>
+<td style="background-color:#FFFFFF;">当窗口获得焦点时调用该事件的处理程序。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onload</td>
+<td style="background-color:#FFFFFF;">当文档(或框架集)被完全装载进来时调用该事件的处理程序。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onmove</td>
+<td style="background-color:#FFFFFF;">当移动窗口时调用该事件的处理程序,仅NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onresize</td>
+<td style="background-color:#FFFFFF;">当调整窗口大小时调用该事件的处理程序。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onunload</td>
+<td style="background-color:#FFFFFF;">当浏览器离开当前文档(或框架集)时调用该事件的处理程序。</td>
+</tr>
+</tbody>
+</table>
+<p>
+<p>
+最常用要数open方法和close方法了，我们先来看一下open方法的详细定义：<br /><br />
+window.open(url, target, style); <br />
+url：指定需要打开的文件的链接。<br />
+target：指定要打开窗口的位置，一般有几个可选属性：_blank在新窗口打开页面，_self在当前窗口打开页面，_top在顶层窗口打开页面，另外还可以指定其他已命名的窗口。<br />
+style：指定窗口显示的风格，因为它的参数众多，且都是可选的，我们用一个例子来说明它。假设我们指定style="height=100, width=400, toolbar= no, menubar=no, scrollbars=no, resizable=no, location=no, status=no,top=100,left=300"，说明我们打开的新窗口的风格是：（高度100，宽度400，不显示工具栏，菜单栏，滚动条，URL栏，状态栏，并且不可改变大小，左上角在屏幕上的位置是(100，300)）<br />
+返回值：该方法返回对新窗口的引用。这个方法颇受争议，万恶的弹出窗口就是它了。<br />
+
+close 方法就比较简单，它主要用来关闭指定引用的窗口。<br />
+现在，我们先来看一个例子。
+<textarea>
+</textarea>
+
+<script>
+	var newWindow;
+	function openWindow(){
+		newWindow = window.open("", "_blank", "height=100, width=400, toolbar= no, menubar=no, scrollbars=no, resizable=no, location=no, status=no,top=100,left=300");
+	}
+	function closeWindow(){
+		if(newWindow){
+			newWindow.close();
+		}
+	}	
+</script>
+
+<button onclick="openWindow()">openWindow</button>
+<button onclick="closeWindow()">closeWindow</button>
+
+</p>
+<p>
+如果你想轮询的执行某任务，比如在AJAX的程序中，轮询的检查服务器上的数据更新，或是希望经过指定的时间去执行某个操作，这个时候我们就需要用到setTimeout,setInterval哥俩了。而clearTimeout，clearInterval 专门用来取消它们。
+<p>
+先来看看setTimeout函数的定义：
+<p style="color:#0000FF">
+功能：用于在指定的毫秒数后调用函数或计算表达式。<br />
+语法：setTimeout(code,millisec)<br />
+参数：
+<ul style="color:#0000FF">
+  <li>code：在定时时间到时要执行的JavaScript代码串。 </li>
+  <li>millisec：设定的定时时间，用毫秒数表示。 </li>
+</ul>
+<span style="color:#0000FF">返回值：定时器的ID值，可用于clearTimeout()方法停止指定的定时器。</span>
+</p>
+<p style="font-size:12px">注：setTimeout()只执行code一次。如果要多次调用，可使用setInterval()或者让code自身再次调用setTimeout()。</p>
+</p>
+<p>
+setInterval函数的定义如下：<br />
+<p style="color:#0000FF">功能：按照指定的周期（以毫秒计）来调用函数或计算表达式。<br />
+语法：setInterval(code,millisec)<br />
+参数：
+<ul style="color:#0000FF">
+  <li>code：在定时时间到时要执行的JavaScript代码串。 </li>
+  <li>millisec：设定的定时时间，用毫秒数表示。 </li>
+</ul>
+<span style="color:#0000FF">返回值：定时器的ID值，可用于clearInterval()方法停止指定的定时器。</span>
+</p>
+<p style="font-size:12px">注：setInterval()方法会不停地调用函数，直到用clearInterval()终止定时或窗口被关闭。</p>
+</p>
+我们来看一个例子，下面有两个个进度条，当点击startTimeout的时候，第一条进度条的长度会逐渐的增加，当点击endTimeout的时候，它就会停下来。当点击startInterval的时候，第二条进度条的长度会逐渐的增加，当点击endInterval之后，它也会停下来。
+<script type="text/javascript">
+
+function progress(id){
+	var bar = document.getElementById(id);
+	var len = parseInt(bar.style.width);
+	if(len > 300){
+		len = 10;
+	}	
+	bar.style.width = len + 1 + 'px';
+}
+
+var timeoutHandler, intervalHandler;
+
+function startTimeout(){
+	//每执行一次，progressBar1的width加1。
+	progress('progressBar1');
+	//100ms 后，调用startTimeout
+	timeoutHandler = window.setTimeout(startTimeout, 100);
+}
+
+function startInterval(){
+	//每隔100ms，progressBar2的with加1.
+	intervalHandler = window.setInterval("progress('progressBar2')", 100);
+}
+
+function endTimeout(){
+	clearTimeout(timeoutHandler);
+}
+function endInterval(){
+	clearInterval(intervalHandler);
+}
+</script>
+<div id="progressBar1" style="background-color:#0000ff; width:20px; border:solid 1px #FFCCFF"></div>
+  <button onclick="startTimeout()">startTimeout</button>
+  <button onclick="endTimeout()">endTimeout</button>
+  <br />
+<div id="progressBar2" style="background-color:#0000ff; width:20px; border:solid 1px #FFCCFF"></div>
+  <button onclick="startInterval()">startInterval</button>
+  <button onclick="endInterval()">endInterval</button>
+  <br />
+  
+这两个特效的实现，我们就用到了setInterval和setTimeout。以下是它的实现源码。
+<br />
+<textarea>
+</textarea>
+<br />
+</p>
+<p>
+moveBy()，moveTo()，resizeBy()，resizeTo()，几个方法尽管用的不多，但是却很有意思，它可以控制窗口的大小和位置，我们使用一个例子来看它们的用法：
+<script type="text/javascript">
+function moveWindow(){
+	// 打开一个新的空白窗口。
+	var ow = window.open("", "_blank", "height=300, width=500, toolbar= no, menubar=no, scrollbars=no, resizable=no, location=no, status=no,top=100,left=300");
+	//1秒钟后，把它向下和向右分别移动100个像素。
+	setTimeout(function(){
+		ow.document.writeln("我向下和向右分别移动100个像素<br />");
+		ow.moveBy(100, 100)
+	}, 1000);
+	//2秒钟后，把它左上角移到坐标(100, 100)处。
+	setTimeout(function(){
+		ow.document.writeln("我左上角的坐标是(100, 100)<br />");
+		ow.moveTo(100, 100)
+	}, 2000);	
+	//3秒钟后，把它的宽度减少100，高度增加100。
+	setTimeout(function(){		
+		ow.document.writeln("我的宽度减少了100，高度增加了100。<br />");
+		ow.resizeBy(-100, 100)
+	}, 3000);	
+	//4秒钟后，把它的宽度和高度设置成300。
+	setTimeout(function(){		
+		ow.document.writeln("我的宽度和高度和宽度是300。<br />");
+		ow.resizeTo(300, 300)
+	}, 4000);
+	//5秒钟后，关闭弹出窗口。
+	setTimeout(function(){		
+		ow.document.writeln("我要被关闭了。<br />");
+		ow.close();
+	}, 5000);	
+}
+</script>
+<br />
+<button onclick="moveWindow()">moveWindow</button>
+<br />
+在这个例子中，我们用到了一个还没学习的方法document.writeln，这个方法在后面会有介绍，它的主要功能是将一个或多个指定的字符串插入当前正在解析的文档中或插入由open()方法打开的文档流中。
+
+</p>
+<p>
+	说到这里，我们不得不提一下浏览器中的对话框，它有三种，就是提示框，确认框，和输入框。使用alert()，confirm()，prompt()函数可以显示它们，由于它们比较简单，而篇幅有限，我们就用一个例子来介绍他们。
+    
+<script type="text/javascript">
+function showAlert(){
+	alert('欢迎你光临我的博客！');
+}
+function showConfirm(){
+	if(confirm("请确认你的操作")){
+		alert('你确认了你的操作。');
+	}else{
+		alert('你取消了你的操作。');
+	}
+}
+function showPrompt(){
+	var str = prompt("请你输入Something！");
+	alert("你输入的内容是:" + str);
+}
+</script>
+<br />
+<button onclick="showAlert()">showAlert</button>  
+<button onclick="showConfirm()">showConfirm</button>  
+<button onclick="showPrompt()">showPrompt</button>  
+
+</p>
+</p>
+</li>
+<li>
+Document对象
+<p>
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">alinkColor</td>
+<td style="background-color:#FFFFFF;">一个字符串属性,指定了document中被激活的链接的颜色。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">anchors</td>
+<td style="background-color:#FFFFFF;">一个Anchor对象数组,每个元素代表了文档中的一个锚。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">applets</td>
+<td style="background-color:#FFFFFF;">一个Applet对象数组。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">bgColor</td>
+<td style="background-color:#FFFFFF;">一个字符串,它是与文档关联在一起的cookie的值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">domain</td>
+<td style="background-color:#FFFFFF;">一个字符串,它指定了文档所属的Internet域。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">embeds</td>
+<td style="background-color:#FFFFFF;">一个对象数组,每个元素表示一个由&lt;embed&gt;标记嵌入文档的数据。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">fgColor</td>
+<td style="background-color:#FFFFFF;">一个字符串属性,指定document文本的默认颜色。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">forms</td>
+<td style="background-color:#FFFFFF;">一个数组,元素是Form对象,每个元素代表出现在document中的一个表单。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">images</td>
+<td style="background-color:#FFFFFF;">一个数组,元素是Image对象,每个元素代表用&lt;img&gt;嵌入文档的一个图像。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">lastModified</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了最后一次修改文档的日期。</td>
+</tr><tr>
+<td style="background-color:#FFFFFF; color:#999900;">linkColor</td>
+<td style="background-color:#FFFFFF;">一个字符串属性,指定了文档中未被访问过的链接的颜色。</td>
+</tr><tr>
+<td style="background-color:#FFFFFF; color:#999900;">links</td>
+<td style="background-color:#FFFFFF;">一个数组,元素是Link对象,每个元素代表了文档中出现过的一个超文本链接。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">location</td>
+<td style="background-color:#FFFFFF;">一个Location对象,含有当前文档的完整URL,是Window.location的同义词，不建议使用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">plugins</td>
+<td style="background-color:#FFFFFF;">数组embeds[]的同义词,不推荐使用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">referrer</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,含有链接到当前文档的文档的URL(如果存在)。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">title</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,指定了当前文档的标题。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">URL</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了文档的URL。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">vlinkColor</td>
+<td style="background-color:#FFFFFF;">一个字符串属性,指定了document中已经访问过的链接的颜色。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">activeElement</td>
+<td style="background-color:#FFFFFF;">一个只读属性,引用文档中当前活动的输入元素(即具有输入焦点的元素)，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">all</td>
+<td style="background-color:#FFFFFF;">一个数组,元素是文档中包含的所有元素，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">charset</td>
+<td style="background-color:#FFFFFF;">文档采用的字符集，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">children</td>
+<td style="background-color:#FFFFFF;">一个数组,元素是文档的所有直接子元素,以他们在源代码中的顺序存放，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">defaultCharset</td>
+<td style="background-color:#FFFFFF;">文档采用的默认字符集，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">expando</td>
+<td style="background-color:#FFFFFF;">如果将expando设置成false,可以阻止客户端对象的扩展，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">parentWindow</td>
+<td style="background-color:#FFFFFF;">包含文档的窗口，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">readyState</td>
+<td style="background-color:#FFFFFF;">文档装载的状态，仅IE支持。它有4个可用的值:
+	<ol>
+    	<li>uninitialized(还没有开始装载文档)</li>
+		<li>loading(正在装载文档)</li>
+		<li>interactive(装载的文档已经足够与用户进行交互)</li>
+		<li>Complete(文档已经装载完毕)</li>
+    </ol>
+</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">defaultCharset</td>
+<td style="background-color:#FFFFFF;">文档采用的默认字符集，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">defaultCharset</td>
+<td style="background-color:#FFFFFF;">文档采用的默认字符集，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">clear()</td>
+<td style="background-color:#FFFFFF;">擦去文档的内容,反对使用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">close()</td>
+<td style="background-color:#FFFFFF;">关闭由open方法打开的文档流。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">open()</td>
+<td style="background-color:#FFFFFF;">打开一个可供写入文档内容的流。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">write()</td>
+<td style="background-color:#FFFFFF;">将一个或多个指定的字符串插入当前正在解析的文档中或插入由open()方法打开的文档流中。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">writeln()</td>
+<td style="background-color:#FFFFFF;">与write()方法相似,只是在输入的字符串中插入一个换行符。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">captureEvents()</td>
+<td style="background-color:#FFFFFF;">请求指定类型的事件，Firefox支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">getSelection()</td>
+<td style="background-color:#FFFFFF;">返回当前选中的文档文本。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">releaseEvents()</td>
+<td style="background-color:#FFFFFF;">停止捕捉指定类型的事件。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">routeEvent()</td>
+<td style="background-color:#FFFFFF;">根据捕捉到的事件找到下一个与之相关的元素。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">elementFromPoint()</td>
+<td style="background-color:#FFFFFF;">返回位于指定地点(X坐标,Y坐标)的元素，仅是IE。</td>
+</tr>
+</tbody>
+</table>
+</p>
+
+<p>
+
+</p>
+</li>
+</ol>
+
+
+
+对于每个HTML标记，他们一般具有如下属性和方法
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">all</td>
+<td style="background-color:#FFFFFF;">该元素包含的所有元素的完整列表,以他们出现的顺序存放,该属性的行为与Document.all[]属性的行为一致,仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">children</td>
+<td style="background-color:#FFFFFF;">一个数组,元素是文档的所有直接子元素,以他们在源代码中的顺序存放，IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">className </td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了元素的class性质的值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">document</td>
+<td style="background-color:#FFFFFF;">包含该元素的document对象的引用，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">id</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了id性质的值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">innerHTML</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了元素含有的HTML文本,不包括元素自身的开始标记和结束标记。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">innerText </td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了元素含有的纯文本,不包括元素自身的开始标记和结束标记。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">lang</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声名了element元素的lang的值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">offsetHeight</td>
+<td style="background-color:#FFFFFF;">元素和它的内容的高度,仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">offsetLeft</td>
+<td style="background-color:#FFFFFF;">元素element的X坐标,相对于offsetParent指定的包容元素，IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">offsetParent</td>
+<td style="background-color:#FFFFFF;">定义了声名坐标系统的包容元素，IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">offsetTop</td>
+<td style="background-color:#FFFFFF;">元素element的Y坐标,相对于offsetParent指定的包容元素，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">offsetWidth</td>
+<td style="background-color:#FFFFFF;">元素和它的内容的宽度，仅IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">outerHTML</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了一个元素的HTML文本,其中包括元素自身的开始标记和结束标记, IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">outerText</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了一个元素的纯文本,其中包括元素自身的开始标记和结束标记, IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900">parentElement</td>
+<td style="background-color:#FFFFFF;">当前元素的直接父元素,该属性是只读的。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">sourceIndex</td>
+<td style="background-color:#FFFFFF;">元素在包容它的Docuement.all[]数组中的下标, IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">style</td>
+<td style="background-color:#FFFFFF;">元素的内联CSS样式性质。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">tagName</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明定义element的HTML标记的名字。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">title</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了定义element的HTML标记的title性质值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">contains()</td>
+<td style="background-color:#FFFFFF;">判断当前元素是否含有指定的元素。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">getAttribute()</td>
+<td style="background-color:#FFFFFF;">获取一个命名性质的值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">handleEvent()</td>
+<td style="background-color:#FFFFFF;">把Event对象传递给适当的事件处理程序。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">insertAdjacentHTML()</td>
+<td style="background-color:#FFFFFF;">把HTML文本插入到与当前元素邻接的文档中。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">insertAdjacentText()</td>
+<td style="background-color:#FFFFFF;">把纯文本插入到与当前元素邻接的文档中。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">removeAttribute()</td>
+<td style="background-color:#FFFFFF;">从元素中删除一个属性和它的值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">scrollIntoView()</td>
+<td style="background-color:#FFFFFF;">滚动文档,使该元素出现在窗口的顶部或底部。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff">setAttribute()</td>
+<td style="background-color:#FFFFFF;">设置元素的性质值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onclick</td>
+<td style="background-color:#FFFFFF;">当用户点击该元素时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">ondbclick</td>
+<td style="background-color:#FFFFFF;">当用户双击该元素时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onhelp</td>
+<td style="background-color:#FFFFFF;">当用户请求帮助(F1)时调用,仅在IE中有效)。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onkeydown</td>
+<td style="background-color:#FFFFFF;">当用户按下一个键时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onkeypress</td>
+<td style="background-color:#FFFFFF;">当用户按下一个键或放开一个键时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onkeyup</td>
+<td style="background-color:#FFFFFF;">当用户放开一个键时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onmousedown</td>
+<td style="background-color:#FFFFFF;">当用户按下一个鼠标按钮时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onmousemove</td>
+<td style="background-color:#FFFFFF;">当用户移动鼠标时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onmouseout</td>
+<td style="background-color:#FFFFFF;">当用户把鼠标移开当前元素时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onmouseover</td>
+<td style="background-color:#FFFFFF;">当用户把鼠标移过一个元素时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff66ff">onmouseup</td>
+<td style="background-color:#FFFFFF;">当用户放开一个鼠标按钮时调用。</td>
+</tr>
+</tbody>
+</table>
+
+Anchor对象
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">name</td>
+<td style="background-color:#FFFFFF;">Anchor对象的名字,该属性的值由&lt;a&gt;的name性质设置。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">text</td>
+<td style="background-color:#FFFFFF;">该属性声明了锚标记&lt;a&gt;和&lt;/a&gt;之间的纯文本(如果存在)。</td>
+</tr>
+</tbody>
+</table>
+
+
+
+Form 对象
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">action</td>
+<td style="background-color:#FFFFFF;">表单的处理页面。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">elements</td>
+<td style="background-color:#FFFFFF;">一个数组,元素是表单中的输入元素。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">encoding</td>
+<td style="background-color:#FFFFFF;">可读可写的字符串,提交表单时传输数据的编码形式。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">length</td>
+<td style="background-color:#FFFFFF;">表单中的元素个数,等价于elements.length。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">mothod</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,它指定了提交表单数据所采用的方法。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">name</td>
+<td style="background-color:#FFFFFF;">声名表单的名字,该属性可读可写。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">target</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,指定了要显示提交表单的结果的窗口或框架的名字。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">reset()</td>
+<td style="background-color:#FFFFFF;">把表单的所有元素重置为它们的默认值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">submit()</td>
+<td style="background-color:#FFFFFF;">提交表单。</td>
+</tr>
+</tbody>
+</table>
+
+Image 对象
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">border</td>
+<td style="background-color:#FFFFFF;">一个整数,声明了图像边线的宽度。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">complete</td>
+<td style="background-color:#FFFFFF;">一个只读的布尔值,声明图像是否已经完全装载进来了。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">height</td>
+<td style="background-color:#FFFFFF;">一个整数,声明了图像的高度,以象素计。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">length</td>
+<td style="background-color:#FFFFFF;">表单中的元素个数,等价于elements.length。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">hspace</td>
+<td style="background-color:#FFFFFF;">一个整数,声明了插入到图像左右的水平距离。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">lowsrc</td>
+<td style="background-color:#FFFFFF;">声明了替代图像(一般较小)的URL,当用户的浏览器在低分辨率的显示器上运行时就显示该图像。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">name</td>
+<td style="background-color:#FFFFFF;">声明图片的名称。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">src</td>
+<td style="background-color:#FFFFFF;">声明图片的URL地址。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">vspace</td>
+<td style="background-color:#FFFFFF;">一个整数,声明了插入到图像上下的垂直距离。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">width</td>
+<td style="background-color:#FFFFFF;">一个整数,声明了图像的宽度,以象素计。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onabort</td>
+<td style="background-color:#FFFFFF;">如果用户放弃装载图像,则调用该事件处理程序。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onerror</td>
+<td style="background-color:#FFFFFF;">如果在装载图像过程中发生了错误,则调用该事件处理程序。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onload</td>
+<td style="background-color:#FFFFFF;">在成功的装载了图像时调用该事件处理程序。</td>
+</tr>
+</tbody>
+</table>
+Input 对象
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">checked</td>
+<td style="background-color:#FFFFFF;">一个可读可写的布尔值,声明了Checkbox元素和Radio元素当前是否被选中。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">defaultChecked</td>
+<td style="background-color:#FFFFFF;">一个只读的布尔值,声明了Checkbox或Radio的初始状态。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">defaultValue</td>
+<td style="background-color:#FFFFFF;">声明了在该表单元素中出现的初始文本,在重置表单时可以使用这个值来恢复元素。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">form</td>
+<td style="background-color:#FFFFFF;">一个只读属性,引用含有该元素的Form对象。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">length</td>
+<td style="background-color:#FFFFFF;">对于Select表单元素,这个属性声明的是options[]数组中存放的选项数。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">name</td>
+<td style="background-color:#FFFFFF;">一个只读的字符串,声明了该元素的名字。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">options</td>
+<td style="background-color:#FFFFFF;">对于Select表单元素来说,这个数组存放的是Option对象。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">selectedIndex</td>
+<td style="background-color:#FFFFFF;">对于Select来说,这个整数声明了当前选中的Select对象的选项。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">type</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了表单元素的类型。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">value</td>
+<td style="background-color:#FFFFFF;">一个字符串属性,声明了在提交表单时提交给服务器的值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">blur()</td>
+<td style="background-color:#FFFFFF;">一个字符串属性,声明了在提交表单时提交给服务器的值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">click()</td>
+<td style="background-color:#FFFFFF;">在表单元素上模拟鼠标点击。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">focus()</td>
+<td style="background-color:#FFFFFF;">将键盘焦点赋予该元素。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">select()</td>
+<td style="background-color:#FFFFFF;">对于显示可编辑文本的表单元素来说,选中其中出现的所有文本。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onblur</td>
+<td style="background-color:#FFFFFF;">将键盘焦点从元素中移开。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onchange</td>
+<td style="background-color:#FFFFFF;">对于非按钮表单元素来说,当用户输入了一个新值或选择了一个新值时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onclick</td>
+<td style="background-color:#FFFFFF;">对于那些按钮表单元素来说,当用点击或选择了该按钮时调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#ff33ff;">onfocus</td>
+<td style="background-color:#FFFFFF;">当用户把键盘焦点给予该元素时调用。</td>
+</tr>
+</tbody>
+</table>
+
+Option 对象
+	
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">defaultSelected</td>
+<td style="background-color:#FFFFFF;">一个布尔值,声明在创建包含该属性的Select对象时,该选项是否被选中。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">index</td>
+<td style="background-color:#FFFFFF;">一个只读整数,声明了选项在包含它的Select对象的options[]数组中的位置和下标。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">selected</td>
+<td style="background-color:#FFFFFF;">一个可读可写的布尔值,声明了一个选项当前是否被选中了。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">text</td>
+<td style="background-color:#FFFFFF;">一个字符串,声明了显示给用户的选项文本。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">value</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了如果在提交表单时option处于选中的状态,要传递给服务器的文本。</td>
+</tr>
+</tbody>
+</table>
+
+Link 对象
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">hash</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,指定了Link对象的锚部分,包括前导散列符(#)。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">host</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,指定了Link的URL的主机名和端口部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">hostname</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,指定了Link的URL的主机名部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">href</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,指定了Link的完整URL。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">pathname</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了Link的URL的路径部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">port</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了Link的URL的端口部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">protocol</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了Link的URL的协议部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">search</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了Link的URL的查询部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">target</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,指定了显示链接文档的Window对象的名称。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">text</td>
+<td style="background-color:#FFFFFF;">声明了出现在链接的标记&lt;a&gt;和&lt;/a&gt;之间的文本，仅NS支持。</td>
+</tr>
+</tbody>
+</table>
+
+
+
+Event 对象
+IE事件模型
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">altKey</td>
+<td style="background-color:#FFFFFF;">一个布尔值,指定事件发生时,ALT键是否被按下并保持住了。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">ctrlKey</td>
+<td style="background-color:#FFFFFF;">一个布尔值,指定事件发生时,Ctrl键是否被按下并保持住了。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">shiftKey</td>
+<td style="background-color:#FFFFFF;">一个布尔值,指定事件发生时,Shift键是否被按下并保持住了。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">keyCode</td>
+<td style="background-color:#FFFFFF;">对于键盘事件,该属性声明了被敲击的键生成的Unicode字符码。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">reason</td>
+<td style="background-color:#FFFFFF;">对于datasetcomplete事件,reason存放数据传输事件的状态码,0(成功)、1(失败)、2(错误)。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">type</td>
+<td style="background-color:#FFFFFF;">一个字符串,说明了事件的类型。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">returnValue</td>
+<td style="background-color:#FFFFFF;">如果设置了该属性,它的值比事件处理程序真正的返回值优先级高。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">cancelBubble</td>
+<td style="background-color:#FFFFFF;">如果事件处理程序想阻止事件传播到包容对象,必须把该属性设置成true。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">fromElement</td>
+<td style="background-color:#FFFFFF;">对于mouseover和mouseout事件,该属性引用移出鼠标的元素。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">toElement</td>
+<td style="background-color:#FFFFFF;">对于mouseover和mouseout事件,该属性引用移入鼠标的元素。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">srcElement</td>
+<td style="background-color:#FFFFFF;">对生成事件的Window对象、Document对象或HTMLDocument对象的引用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">srcFilter</td>
+<td style="background-color:#FFFFFF;">对于filterchange事件,该属性声明改变的过滤器。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">clientX, ClientY</td>
+<td style="background-color:#FFFFFF;">声明了事件发生的位置相对于浏览器页面的X坐标和Y坐标。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">offsetX, offsetY</td>
+<td style="background-color:#FFFFFF;">发生事件的地点在事件源元素的坐标系统中的X坐标和Y坐标。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">x, y</td>
+<td style="background-color:#FFFFFF;">事件发生的位置的x坐标和y坐标(IE中它们声明了相对于用CSS动态定位的最内层包容元素的X坐标和Y坐标)。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">screenX, screenY</td>
+<td style="background-color:#FFFFFF;">事件发生的地点相对于屏幕的X坐标和Y坐标。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">button</td>
+<td style="background-color:#FFFFFF;">对于鼠标事件,button事件声明了被按下的鼠标按钮或按钮。</td>
+</tr>
+</tbody>
+</table>
+
+标准的事件模型
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">type</td>
+<td style="background-color:#FFFFFF;">一个字符串,说明了事件的类型。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">width</td>
+<td style="background-color:#FFFFFF;">只能由resize的事件设置,声明了调整过窗口的新高度或框架的新宽度。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">height</td>
+<td style="background-color:#FFFFFF;">只能由resize的事件设置,声明了调整过窗口的新高度或框架的新高度。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">which</td>
+<td style="background-color:#FFFFFF;">"对于键盘事件和鼠标事件来说,which声明的是按下或放开的键或鼠标按钮。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">target</td>
+<td style="background-color:#FFFFFF;">对生成事件的Window对象、Document对象、Layer对象或HTMLDocument对象的引用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">modifiers</td>
+<td style="background-color:#FFFFFF;">声明了事件发生时按下并保持住的组合键,NS6 未定义该属性。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">layerX, layerY</td>
+<td style="background-color:#FFFFFF;">事件相对于包容图层的X坐标和Y坐标。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">pageX, pageY</td>
+<td style="background-color:#FFFFFF;">事件发生的位置相对于浏览器页面的X坐标和Y坐标。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">x, y</td>
+<td style="background-color:#FFFFFF;">事件发生的位置的x坐标和y坐标(在NS4中其等价于layerX和layerY)。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">screenX, screenY</td>
+<td style="background-color:#FFFFFF;">事件发生的地点相对于屏幕的X坐标和Y坐标。</td>
+</tr>
+
+</tbody>
+</table>
+
+XMLHTTPRequest
+
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000FF;">abort()</td>
+<td style="background-color:#FFFFFF;">停止当前请求。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000FF;">getAllResponseHeaders()</td>
+<td style="background-color:#FFFFFF;">把HTTP请求的所有响应首部作为键/值对返回。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000FF;">getResponseHeader()</td>
+<td style="background-color:#FFFFFF;">格式：getResponseHeader(header),返回指定名称的HTTP响应头。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000FF;">open()</td>
+<td style="background-color:#FFFFFF;">格式：open(method, url, async)。method指示HTTP请求方式，参数可以是GET,POST或PUT, url指示请求资源的地址，参数可以是相对于URL或绝对值URL，async参数是否建立异步连接，默认为true, 建立对服务器的调用。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000FF;">setRequestHeader()</td>
+<td style="background-color:#FFFFFF;">格式：setRequestHeader(header, value)，把指定首部设置为所提供的值，在设置任何首部之前必须先调用open()。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">onreadystatechange</td>
+<td style="background-color:#FFFFFF;">用于指定状态改变时的事件处理函数，每个状态都会触发这个事件处理器。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">readyState</td>
+<td style="background-color:#FFFFFF;">请求的状态。有5个可取值：0=未初始化、1=正在加载、2=已加载、3=交互中、4=完成。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">responseText</td>
+<td style="background-color:#FFFFFF;">服务器的响应,表示一个串。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">responseXML</td>
+<td style="background-color:#FFFFFF;">服务器的响应,表示为XML.这个对象可以解析为一个DOM对象。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">status</td>
+<td style="background-color:#FFFFFF;">服务器响应的HTTP状态码。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">statusText</td>
+<td style="background-color:#FFFFFF;">HTTP状态码的相应文本。</td>
+</tr>
+</tbody>
+</table>
+
+Location 对象
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">hash</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,指定了当前URL中的锚部分,包括前导散列符(#)。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">host</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,指定了当前URL中的主机名和端口部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">hostname</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,指定了当前URL中的主机名部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">href</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,它声明了当前显示文档的完整URL。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">pathname</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了当前URL中的路径部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">port</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了当前URL中的端口部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">protocol</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了当前URL中的协议部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">search</td>
+<td style="background-color:#FFFFFF;">一个可读可写的字符串,声明了当前URL中的查询部分。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">reload()</td>
+<td style="background-color:#FFFFFF;">从缓存或服务器中再次把当前文档装载进来。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">replace()</td>
+<td style="background-color:#FFFFFF;">用一个新文档替换当前文档,而不用在浏览器的会话历史中生成一个新的记录。</td>
+</tr>
+</tbody>
+</table>
+Screen 对象 提供有关显示器的信息
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">availHeight, availWidth</td>
+<td style="background-color:#FFFFFF;">声明了显示web浏览器的屏幕的可用高度和宽度,以象素计。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">availLeft, availTop</td>
+<td style="background-color:#FFFFFF;">声明了屏幕最左侧的X坐标和Y坐标,这个坐标不是分配给暂存特性的空间的坐标。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">colorDepth</td>
+<td style="background-color:#FFFFFF;">声明了浏览器分配的颜色数的以2为底的对数,可用于显示图像。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">pixelDepth</td>
+<td style="background-color:#FFFFFF;">声明显示浏览器屏幕的颜色深度,以每象素的位数计。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">height, width</td>
+<td style="background-color:#FFFFFF;">声明了显示web浏览器的屏幕的高度和宽度,以象素计。</td>
+</tr>
+</tbody>
+</table>
+<script type="text/javascript">
+//显示用户的分辨率
+function showResolution(){
+	alert("您当前电脑的分辨率是: " + screen.width + "×" + screen.height);
+}
+</script>
+<button onclick="showResolution()">运行代码</button>
+<p>&nbsp;</p>
+<p>Navigator对象,正在使用的浏览器的信息
+</p>
+<table style="width: 640px; background-color: #ccccff;" border="0" cellspacing="1" cellpadding="2">
+<tbody>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">appCodeName</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了浏览器的代码名。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">appName</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了浏览器的名字。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">appVersion</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了浏览器的平台和版本信息。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">CookieEnabled</td>
+<td style="background-color:#FFFFFF;">一个只读布尔值，指示是否支持Cookie。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">language</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了浏览器版本使用的默认语言，Firefox，NS支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">mimeTypes</td>
+<td style="background-color:#FFFFFF;">一个MimeType对象的数组,其中每个元素代表浏览器支持的一种MIME类型。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">platform</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了运行浏览器的操作系统和(或)硬件平台。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">systemLanguage</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了浏览器版本使用的默认语言，IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">userAgent</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了浏览器用于HTTP请求的用户代理头的值。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">userLanguage</td>
+<td style="background-color:#FFFFFF;">一个只读字符串,声明了用户想使用的语言，IE支持。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#999900;">plugins </td>
+<td style="background-color:#FFFFFF;">一个Plugin对象的数组,其中每个元素代表浏览器已经安装的插件。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">javaEnabled()</td>
+<td style="background-color:#FFFFFF;">检测当前浏览器是否支持并启用了Java。</td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF; color:#0000ff;">plugins.refresh()</td>
+<td style="background-color:#FFFFFF;">检测一个新安装的插件,把它插入到plugins数组中,并使用这些插件有选择的重新装载文档。</td>
+</tr>
+</tbody>
+</table>
+
+<script type="text/javascript">
+function showNavigatorInfo(){
+	var result = '';
+	for(var p in navigator){
+		result += p + ': ' +  navigator[p] + '\n';
+	}
+	alert(result);
+}
+
+var navigatorDetector = function() {
+    var o = {
+        ie:0,
+        opera:0,
+        gecko:0,
+        webkit: 0,
+        mobile: null,
+        air: 0,
+        caja: 0
+    }, ua = navigator.userAgent, m;
+	
+    if ((/KHTML/).test(ua)) {
+        o.webkit=1;
+    }
+    m=ua.match(/AppleWebKit\/([^\s]*)/);
+    if (m&&m[1]) {
+        o.webkit=parseFloat(m[1]);
+        if (/ Mobile\//.test(ua)) {
+            o.mobile = "Apple"; 
+        } else {
+            m=ua.match(/NokiaN[^\/]*/);
+            if (m) {
+                o.mobile = m[0]; 
+            }
+        }
+        m=ua.match(/AdobeAIR\/([^\s]*)/);
+        if (m) {
+            o.air = m[0]; 
+        }
+    }
+
+    if (!o.webkit) { 
+        m=ua.match(/Opera[\s\/]([^\s]*)/);
+        if (m&&m[1]) {
+            o.opera=parseFloat(m[1]);
+            m=ua.match(/Opera Mini[^;]*/);
+            if (m) {
+                o.mobile = m[0]; 
+            }
+        } else { // not opera or webkit
+            m=ua.match(/MSIE\s([^;]*)/);
+            if (m&&m[1]) {
+                o.ie=parseFloat(m[1]);
+            } else { 
+                m=ua.match(/Gecko\/([^\s]*)/);
+                if (m) {
+                    o.gecko=1; 
+                    m=ua.match(/rv:([^\s\)]*)/);
+                    if (m&&m[1]) {
+                        o.gecko=parseFloat(m[1]);
+                    }
+                }
+            }
+        }
+    }
+
+    m=ua.match(/Caja\/([^\s]*)/);
+    if (m&&m[1]) {
+        o.caja=parseFloat(m[1]);
+    }
+    
+    return o;
+}();
+
+alert(navigatorDetector.ie);
+</script>
+<button onclick="showNavigatorInfo()">运行代码</button>
+</body>
+</html>
+
+
+
+
+
+
+

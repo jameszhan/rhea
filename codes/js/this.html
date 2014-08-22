@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title></title>
+</head>
+
+<body>
+<textarea id="msgBox" cols="80" rows="25"></textarea>
+<br />
+<button id="clickBtn">Btn</button>
+</body>
+
+
+<script type="text/javascript">
+var msgLog = document.getElementById('msgBox');
+function log(msg){
+	msgLog.value += msg + "\n";	
+}
+
+function Foo(){
+	if(this.constructor == arguments.callee){
+		log("Object created.");
+	}else if(this == window){
+		log("Normal Call.");
+	}else{
+		log("Called by " + this.constructor);
+	}
+}
+
+new Foo();
+new Foo('test');
+Foo();
+Foo('test');
+Foo.call(new Object());
+Foo.apply(new Object());
+
+Foo.call(123)
+Foo.apply("test string.");
+Foo.apply({a:1, b:2});
+
+function Base(){
+	this.foo = function(){
+		return 20;
+	}
+	this.bar = function(){
+		return this.foo() + 10;
+	}
+}
+
+function Drivide(){
+	this.foo = function(){
+		return 30;
+	}
+}
+
+Drivide.prototype = new Base();
+
+var d = new Drivide();
+log(d.bar());
+
+var cb = document.getElementById('clickBtn');
+
+
+var obj = {};
+obj.foo = function(){
+	log('this === cb: ' + (this === cb));
+	log('this === window: ' + (this === window));	
+	log('this === obj: ' + (this === obj));
+	log('\n\n');
+}
+
+setTimeout(obj.foo, 3000);
+setTimeout(function(){
+	obj.foo.call(obj);
+}, 6000);
+
+//btn.onclick = obj.foo;
+bind(cb, 'click', obj.foo);
+//bind(cb, 'click', function(){	
+//	obj.foo.call(cb);	
+//})
+
+
+function bind(obj, type, fn){
+	obj.addEventListener && obj.addEventListener(type, fn) || obj.attachEvent('on' + type, fn);	
+}
+
+
+</script>
+
+
+</html>

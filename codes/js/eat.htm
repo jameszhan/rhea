@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>贪吃蛇1.0</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        * { margin:0; padding:0;}
+        .wrapper { width:400px; margin:20px; font-size:12px; line-height:20px; font-family:Arial, Helvetica, sans-serif, Verdana;}
+        h1{ font-size:14px; line-height:28px;}
+        p { padding:4px 20px;}
+        .tab { clear:both; border-collapse:collapse; width:400px; margin:4px auto; border:1px solid #CBCBCB; }
+        .tab td { border:1px solid #999; height:20px; background:#333;  }
+        .tab td.on { background:blue; }
+        .tab td.fish { background:green; }
+    </style>
+    <script type="text/javascript">
+        /*
+         by ahwing
+         贪吃蛇1.0
+         */
+        var getRondom = function(small,big){
+            return parseInt(small+(big-small)*Math.random());
+        }
+
+        var each = function(obj,fun){
+            for(var key in obj){
+                obj[key].index=key;
+                fun.call(obj[key]);
+            }
+        }
+        function addEvent( obj, type, fn ) {
+            if ( obj.attachEvent ) {
+                obj['e'+type+fn] = fn;
+                obj[type+fn] = function(){obj['e'+type+fn]( window.event );}
+                obj.attachEvent( 'on'+type, obj[type+fn] );
+            } else
+                obj.addEventListener( type, fn, false );
+        }
+        function removeEvent( obj, type, fn ) {
+            if ( obj.detachEvent ) {
+                obj.detachEvent( 'on'+type, obj[type+fn] );
+                obj[type+fn] = null;
+            } else
+                obj.removeEventListener( type, fn, false );
+        }
+        var Class = {create: function() {return function() { this.initialize.apply(this, arguments); }}};
+        var Snake = Class.create();
+        Snake.prototype =  {
+            initialize: function(box,num,speed,len,s_len,fx){
+                this.box= document.getElementById(box);
+                this.num= document.getElementById(num);
+                this._len = len|| '20';
+                this.s_len = s_len|| '3';
+                this.speed = speed || '1';
+                this.fx = fx || 'right';
+                _this = this;
+                var tab = document.createElement('table');
+                tab.cellspacing = '0';
+                tab.className = 'tab';
+                for(var j=0;j<=this._len-1;j++){
+                    var tr   =  tab.insertRow(tab.rows.length);
+                    for(var i=0;i<=this._len-1;i++){
+                        var td   =  tr.insertCell(tr.cells.length);
+                    }
+                }
+                this.box.appendChild(tab);
+                this.tds = this.box.getElementsByTagName('td');
+                this.tds_length = this.tds.length;
+                // 蛇
+                var _dx = getRondom(3,this._len-1), _dy = getRondom(3,this._len-1);
+                this.s = [];
+                for(var i=0; i<this.s_len;i++){
+                    this.s.push([_dx-i,_dy]);
+                }
+                // fish
+                var _fx = getRondom(0,this._len-1), _fy = getRondom(0,this._len-1);
+                this.f=[_fx,_fy];
+                addEvent(document, 'keyup', function(eve){_this.key(eve);});
+                this.gogo();
+            },
+            show:function(){
+                for(var i=0; i<this.tds_length;i++){this.tds[i].className = '';}
+                each(this.tds,function(){this.className='';});
+//       each(this.s,function(){tds[this[0]+this[1]*le].className='on';})
+                this.tds[this.f[0]+this.f[1]*this._len].className='fish';
+                for(var j=0;j<this.s.length;j++){this.tds[this.s[j][0]+this.s[j][1]*this._len].className='on';}
+            },
+            move:function(){
+                var p0_x = this.s[0][0],p0_y = this.s[0][1];
+                function isfish(){
+                    if(p0_x==_this.f[0]&&p0_y==_this.f[1]) _this.eat()
+                    else _this.s.pop();
+                };
+                if(this.fx=="right"){ if(p0_x==this._len-1){this.stopp()}else{
+                    isfish()
+                    this.s.unshift([p0_x+1,p0_y]);
+                }}
+
+                else if(this.fx=="left"){ if(this.s[0][0]==0){this.stopp()}else{
+                    isfish();
+                    this.s.unshift([this.s[0][0]-1,this.s[0][1]]);
+                }}
+
+                else if(this.fx=="top"){ if(this.s[0][1]==0){this.stopp()}else{
+                    isfish();
+                    this.s.unshift([this.s[0][0],this.s[0][1]-1]);
+                }}
+
+                else if(this.fx=="bottom"){ if(this.s[0][1]==this._len-1){this.stopp()}else{
+                    isfish();
+                    this.s.unshift([this.s[0][0],this.s[0][1]+1]);
+                }};
+                this.show();
+            },
+            eat: function(){
+                this.tds[this.f[0]+this.f[1]*this._len].className='';
+                this.num.innerHTML++;
+                this.f=[getRondom(0,this._len-1),getRondom(3,this._len-1)];
+            },
+            gogo:function(){
+                this.t = setInterval(function(){_this.move()},this.speed*100);
+            },
+            key: function(eve){
+                var _event = eve? eve :event;
+                switch(_event.keyCode){
+                    case 37: this.fx = 'left';
+                        break;
+                    case 38: this.fx = 'top';
+                        break;
+                    case 39: this.fx = 'right';
+                        break;
+                    case 40: this.fx ='bottom';
+                        break;
+                    default: this.fx = '';
+                }
+            },
+            stopp: function(){
+                clearInterval(this.t);
+                removeEvent(document, 'keyup', function(eve){_this.key(eve);});
+                alert('撞墙咯！')
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <h1>贪吃蛇1.0</h1>
+    <div id="box"> </div>
+    <p>已经吃了<span id="num"></span>条鱼</p>
+    <form name="tcs">
+        <p>选择格子的数量：
+            <input type="text" name="txt1"/>
+        </p>
+        <p>选择起始蛇的长度：
+            <input type="text" name="txt2"/>
+        </p>
+        <p>选择速度：
+            <select name="sel">
+                <option value="10">1级</option>
+                <option value="9">2级</option>
+                <option value="8" selected="selected">3级</option>
+                <option value="7">4级</option>
+                <option value="6">5级</option>
+                <option value="5">6级</option>
+                <option value="4">7级</option>
+                <option value="3">8级</option>
+            </select>
+        </p>
+        <p>
+            <input type="button" value="贪吃蛇，gogogo！" onclick="snake = new Snake('box','num',document.tcs.sel.value,document.tcs.txt1.value,document.tcs.txt2.value);" />
+        </p>
+    </form>
+</div>
+</body>
+</html>

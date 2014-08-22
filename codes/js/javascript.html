@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+function log(msg){
+	document.writeln(msg + "<br />");
+}
+
+//构造继承
+function Collection(size){
+	this.size = function(){return size;}
+}
+
+Collection.prototype.isEmpty = function(){
+	return this.size == 0;
+}
+
+function ArrayList(){
+	var _els = [];
+	_els = Array.apply(_els, arguments);		
+	Collection.call(this, _els.length);
+	this.add = function(){
+		_els.push.apply(_els, arguments);
+	}
+	this.toArray = function(){
+		return _els;
+	}
+}
+
+ArrayList.prototype.toString = function(){
+	return this.toArray().toString();
+}
+
+function SortedList(){
+	this.base = ArrayList;
+	this.base.apply(this, arguments);
+	this.sort = function(){
+		var arr = this.toArray();
+		arr.sort.apply(arr, arguments);
+	}
+}
+
+var l = new ArrayList(1, 2, 3, 4, 5);
+log(l);
+l.add(7);
+log(l);
+log(l.size());
+log("1 instanceof Collection: " + (l instanceof Collection));
+log("1 instanceof ArrayList: " + (l instanceof ArrayList));
+//log(l.isEmpty());
+
+l = new SortedList(3, 1, 2);
+l.add(8);
+l.add(7);
+l.sort();
+log(l);
+log(l.toArray());
+log("1 instanceof Collection: " + (l instanceof Collection));
+log("1 instanceof ArrayList: " + (l instanceof ArrayList));
+log("1 instanceof SortedList: " + (l instanceof SortedList));
+
+
+
+//原型继承
+log('');
+log('prototype extend');
+var Point = function(dimension){
+	this.dimension = dimension;
+}
+
+function Point2D(x, y){
+	this.x = x;
+	this.y = y;
+}
+Point2D.prototype.distance = function(){
+	return Math.sqrt(this.x * this.x + this.y * this.y);
+}
+Point2D.prototype = new Point(2);
+
+var Point3D = function (x, y, z){
+	this.x = x;
+	this.y = y;
+	this.z = z;
+}
+Point3D.prototype = new Point(3);
+
+var p2 = new Point2D(3, 4);
+var p3 = new Point3D(1, 2, 3);
+log(p2.dimension);
+log(p3.dimension);
+log("p2 instanceof Point2D: " + (p2 instanceof Point2D));
+log("p2 instanceof Point: " + (p2 instanceof Point));
+log("p3 instanceof Point3D: " + (p3 instanceof Point3D));
+log("p3 instanceof Point: " + (p3 instanceof Point));
+
+
+//实例继承
+log('');
+log('instance extend');
+function MyDate(){
+	var instance = new Date();
+	instance.printDate = function(){
+		log(instance.toLocaleString());
+	}
+	return instance;
+}
+
+var d = new MyDate();
+log("d instanceof MyDate: " + (d instanceof MyDate));
+log("d instanceof Date: " + (d instanceof Date));
+d.printDate();
+log(d.toGMTString());
+
+//拷贝继承
+log('');
+log('copy extend');
+
+Function.prototype.extend = function(target){
+	for(var e in target){
+		this.prototype[e] = target[e];
+	}
+}
+
+function Shape(){
+	this.name = 'Shape';
+	this.show = function(){
+		return this.toString.apply(this, arguments);
+	}
+}
+
+Shape.prototype.moveTo = function(x, y){
+	log(this.name + " Move to {" + x + "," + y + "}");
+}
+
+function Rectangle(){
+	this.toString = function(){
+		return 'This is a Rectangle.';
+	}
+}
+
+function Square(){
+	this.toString = function(){
+		return 'This is a Square.';
+	}
+}  
+
+Rectangle.extend(new Shape());
+Square.extend(new Shape());
+
+var s = new Rectangle();
+log(s);
+log(s.show());
+s.moveTo(200, 500);
+
+var s2 = new Square();
+log(s2);
+log(s2.show());
+s2.moveTo(200, 500);
+
+</script>
+<title></title>
+</head>
+
+<body>
+</body>
+</html>

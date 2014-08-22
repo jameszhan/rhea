@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<script type="text/javascript">
+function log(msg){
+	document.writeln(msg + "<br />");
+}
+(function(){
+	i = 1;
+	if(true){
+		for(var i = 0; i < 10; i++){
+			var k = i;
+		}
+		var j = 1;
+	}
+	log("i=" + i);
+	log("j=" +j);
+	log("k=" +k);
+})();
+
+(function(){
+	var a, b = 0, c = '0';
+	log(a == undefined);
+	log(a == null);
+	log(a == NaN);
+	log(a == false);
+	log(a == b);
+	log(b == c);	
+	log(a === undefined);
+	log(a === null);
+	log(a === NaN);
+	log(a === false);
+	log(a === b);
+	log(b === c);	
+});
+
+(function(){
+	for(var i = 0; i < 10; i++){
+		(function(i){
+			setTimeout(function(){
+				alert(i);
+			}, 1000 * i);
+		})(i);		
+	}
+});
+
+(function(){
+	for(var i = 0; i < 10; i++){
+		setTimeout("alert(" + i + ")", 5000 * i)
+	}
+});
+
+(function(){
+	function parabola(a, b, c, x){
+		return a * x * x + b * x + c;
+	}  
+	//y=x2+2x-5 (x = 10)
+	alert(parabola(1, 2, -5, 10));
+	//2x2+3x+6 (x = 10)
+	alert(parabola(2, 3, 6, 10));
+});
+
+(function(){
+	function parabola(a, b, c){
+		return function(x){
+			return a * x * x + b * x + c;
+		};
+	}  
+	//y=x2+2x-5 (x = 10)
+	var f1 = parabola(1, 2, -5);
+	alert(f1(10));
+	//2x2+3x+6 (x = 10)
+	var f2 = parabola(2, 3, 6);
+	alert(f2(10));
+});
+
+(function(){
+	var i, j = 1, k, l = 1;
+	(function(){
+		var i = 3, j = 3;
+		k = 3, l = 3;
+		var m = 3;
+		n = 3;
+	})();
+	document.writeln(i === undefined);
+	document.writeln(j === 1);
+	document.writeln(k === 3);
+	document.writeln(l === 3);
+	document.writeln(window.m === undefined);
+	document.writeln(n === 3);
+})();
+
+(function(){
+	
+	function format(num){
+		return num.toString().replace(/(?=(?:\d{3})+$)/g, ",").replace(/^,/, "");		
+	}
+
+	function formatNum(num){
+		var n = '' + num, len = n.length, start = len % 3, r = [];
+		start > 0 && r.push(n.substring(0, start));
+		while(start < len){
+			r.push(n.substr(start, 3));
+			start += 3;
+		}	
+		return r.join(',');
+	}
+	alert(format(1234567890));
+	alert(format(123456789));
+	alert(format(12345678));
+	alert(format(1234567));
+	alert(format(123));
+	alert(format(12));
+	alert(format(1));
+	
+})();
+
+
+</script>
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
