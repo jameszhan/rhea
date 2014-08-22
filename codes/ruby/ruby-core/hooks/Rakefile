@@ -1,0 +1,158 @@
+
+
+
+namespace :samples do
+  task :autoload do
+    autoload :Test1, './test1.rb'
+    autoload :Test1, './test1.rb'
+    autoload :Test1, './test1.rb'
+    autoload :Test1, './test1.rb'
+    autoload :Test1, './test1.rb'
+    puts "Autoload Test1 completed!"
+    Test1.new
+    Test1.new
+    Test1.new
+    Test1.new
+    Test1.new
+  end
+  task :require do
+    puts File.expand_path('../config/application', __FILE__)
+    puts "Load PATH = #{$:}"
+    require './test1'
+    require './test1.rb'
+    require './test1.rb'
+    puts "Require Test1 completed!"
+    Test1.new
+  end
+  
+  namespace :hook do
+    
+    task :added do
+      module Bar
+        def bcd
+          puts "bcd"
+        end
+        def aaaaa
+        end
+      end
+      class Foo
+        def self.method_added(id)
+          puts "#{id} added in #{self}"
+          if id == 'aaa'
+            
+          end
+        end
+        def singleton_method_added(id)
+          puts "#{id} added in #{self}"
+        end
+        def aaa
+          puts "ddddddd"
+        end
+        include Bar
+      end
+      Foo.new.bcd
+      
+      class Foo
+        def xyz
+        end
+      end
+      Foo.send :define_method, :mmm do
+        puts "Hello World."
+      end
+      
+      foo = Foo.new
+      class << foo
+        def y
+        end
+      end     
+      
+    end
+    
+    task :class do
+      autoload :Hook, './hook_class.rb'
+      class Test < Hook
+        
+      end
+      Test.new.c1
+    end
+    task :module do
+      autoload :Hook, './hook_module.rb'
+      class Test 
+#        include Hook
+        extend Hook
+      end
+#      Test.new.m1
+      Test.m1
+    end
+    
+    task :missing do
+      autoload :Hook, './hook_module.rb'
+      class Test
+        extend Hook
+        include Hook
+      end
+      Test::AAA
+      Test.a
+      Test.new.b
+    end
+    
+    task :clone do
+      class Test
+        attr_accessor :x, :y
+        def initialize_copy(obj)
+          puts "#{obj} #{__method__}"
+          @x = rand(100)
+          #obj.y = 10000
+          return "XXXXX"
+        end
+        
+      end
+      
+      a = Test.new
+      a.x = 1
+      a.y = 2
+      puts "a.x = #{a.x}, a.y = #{a.y}"
+      b = a.clone
+      c = a.dup
+      puts "a.x = #{a.x}, b.x = #{b.x}, c.x = #{c.x}"
+      puts "a = #{a}, b = #{b}, c = #{c}"
+      puts "a.y = #{a.y}, b.y = #{b.y}, c.y = #{c.y}"
+    end
+    
+    task :numeric do
+      class String
+        def coerce(n)
+          puts "begin convert #{self} in method #{__callee__}."
+          [n, Float(self)]
+        end
+        def to_i
+          puts "begin convert #{self} to integer in method #{__callee__}."
+        end
+        def to_f
+          puts "begin convert #{self} to integer in method #{__callee__}."
+        end
+      end
+      puts 1 + "2.2"      
+    end
+    
+    task :marshal do
+      class Foo
+        def initialize
+          p "#{__callee__} called"
+          @foo = ['foo', 'bar']
+        end
+        def marshal_dump
+          puts "#{__callee__} on #{self}"
+          @foo
+          #"AAAAA"
+        end
+        def marshal_load(obj)
+          puts "#{__callee__} on #{self}"
+          @foo = obj
+        end
+      end
+      
+      p Marshal.load(Marshal.dump(Foo.new))
+    end
+  end
+end

@@ -1,3 +1,11 @@
+;;
+;;
+;;<expr> ::= <identifier>
+;;<expr> ::= lambda <identifier-list>. <expr>
+;;<expr> ::= (<expr> <expr>)
+;;
+;;
+
 (def zero (fn [f] (fn [x] x)))
 (def succ (fn [n] (fn [f] (fn [x] (f ((n f) x))))))
 
