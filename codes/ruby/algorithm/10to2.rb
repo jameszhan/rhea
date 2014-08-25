@@ -7,7 +7,7 @@ end
 
 ret = []
 convert_10_to_2(10, ret)
-p ret.join("")
+p ret.join('')
 
 
 def reverse_input()

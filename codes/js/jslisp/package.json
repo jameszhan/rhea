@@ -1,0 +1,12 @@
+{
+    "name": "jslisp",
+    "description": "An interpreter for LISP.",
+    "author": "James Zhan",
+    "version": "0.1.0",
+    "scripts": {
+        "test": "/usr/local/bin/jasmine-node *.spec"
+    },
+    "devDependencies": {
+        "jasmine-node": "1.14.2"
+    }
+}

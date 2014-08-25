@@ -22,4 +22,4 @@ end
 
 rnd = rand(16)
 
-1000.times{ print rnd.call, "," }
+1000.times{ print rnd.call, ',' }
