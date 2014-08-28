@@ -11,3 +11,8 @@
 
 (println (two (fn [x] (three inc x)) 0))
 
+(defn add [n m] (fn [f x] (m f (n f x))))
+(println ((add two three) inc 0))
+(defn mul [n m] (fn [f x] (m (partial n f) x)))
+(println ((mul two three) inc 0))
+(defn exp [a n] )
