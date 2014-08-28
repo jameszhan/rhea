@@ -8,9 +8,8 @@
 ;;
 
 
-(def fact-maker (fn [f]
-                  (fn [n]
-                    (if (= 0 n) 1 (* n (f (dec n)))))))
+;; (def fact-maker (fn [f] (fn [n] (if (= 0 n) 1 (* n (f (dec n)))))))
+(defn fact-maker [f] (fn [n] (if (= 0 n) 1 (* n (f (dec n))))))
 
 (defn Y1 [f]
   (fn [g]
