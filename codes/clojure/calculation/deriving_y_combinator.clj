@@ -81,7 +81,6 @@
 (assert (= ((Y fib-gen) 6) 8))
 (assert (= ((Y fac-gen) 5) 120))
 
-
 ;; 最终版本，具有clojure特色
 (defn y-combinator [gen]
   (#(% %) (fn [f] #(apply (gen (f f)) %&))))
