@@ -14,3 +14,24 @@
 ;;
 ;;
 ;;
+
+(defn fac-gen [f]
+  #(if (<= % 1) 1 (* % (f (dec %)))))
+
+;; 根据定义得出的函数如下，但是它毫无用武之地，因为他不能处理f依赖的参数，而且它还会进入无限递归。
+;; (defn y [f]
+;;   ((fn [x] (f (x x)))
+;;    (fn [x] (f (x x)))))
+
+;; 让我们给他加入参数
+(defn y [f]
+  ((fn [x] (fn [args] ((f (x x)) args)))
+    (fn [x] (fn [args] ((f (x x)) args)))))
+(assert (= ((y fac-gen) 5) 120))
+
+
+;; DRY，代码明显重复，让我们去除重复代码。
+(defn Y [f]
+  ((fn [g] (g g))
+    (fn [x] (fn [args] ((f (x x)) args)))))
+(assert (= ((Y fac-gen) 5) 120))
