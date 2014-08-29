@@ -11,6 +11,13 @@ module YCombinator
       }
     })
   end
+
+  def y_combinator(&f)
+    lambda {|&u| u[&u]}.call do |&x|
+      f[&lambda {|*a| x[&x][*a]}]
+    end
+  end
+
 end
 
 # Give the y_comb function to all objects
@@ -30,3 +37,10 @@ hash['a']['b']['c']['d']['e']['f']['g'] = 1
 
 # And hash looks like:
 puts hash   # => {"a"=>{"b"=>{"c"=>{"d"=>{"e"=>{"f"=>{"g"=>1}}}}}}}
+
+
+ret = y_combinator do |&fab|
+  lambda {|n| n.zero? ? 1: n * fab[n-1]}
+end[10]
+
+puts ret

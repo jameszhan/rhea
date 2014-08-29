@@ -92,5 +92,9 @@
 ;; To verify and emphasize that what we've got here is a fixed point, we can explicitly pass the
 ;; output of the combinator back into the maker function.
 (assert (= ((fact-maker (Y fact-maker)) 5) 120))
+(assert (= ((fact-maker (Y fact-maker)) 5) 120))
+(assert (= ((fact-maker (fact-maker (Y fact-maker))) 5) 120))
+(assert (= ((fact-maker (fact-maker (fact-maker (Y fact-maker)))) 5) 120))
+(assert (= ((fact-maker (fact-maker (fact-maker (fact-maker (Y fact-maker))))) 5) 120))
 ;; This might be magic.
 
