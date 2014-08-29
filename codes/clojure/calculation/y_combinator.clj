@@ -6,6 +6,12 @@
 ;; 即有：
 ;; Y(F) = F(Y(F))
 ;;
+;; Y = λfλgλn.f (g g) n
+;; Y F = λfλgλn.f (g g) n
+;;
+;;
+;;
+;;
 
 
 ;; (def fact-maker (fn [f] (fn [n] (if (= 0 n) 1 (* n (f (dec n)))))))
@@ -18,10 +24,11 @@
 
 (assert (= (((Y1 fact-maker) (Y1 fact-maker)) 5) 120))
 
-(defn Y [f]
+(defn Y [gen]
   ((fn [g] (g g))
-    (fn [h]
-      (fn [n] ((f (h h)) n)))))
+    (fn [f]
+      (fn [n] ((gen (f f)) n)))))
+
 
 (assert (= ((Y fact-maker) 5) 120))
 (assert (= ((fact-maker (Y fact-maker)) 5) 120))
