@@ -15,8 +15,6 @@
 ;(defn mult [m n] (fn [f x] (n #(m f %) x)))
 (defn mult [m n] (fn [f x] (n (partial m f) x)))
 
-(defn exp [a n] (fn [f x] (n ((fn [g] (fn [y] (a g y))) f) x)))
-
 ;(defn church->int [n] (n #(inc %) 0))
 (defn church->int [n] (n inc 0))
 
@@ -44,9 +42,3 @@
 (println (church->int (mult three two)))
 (println (church->int (mult three (succ two))))
 
-(println "EXP")
-;(println (church->int (exp zero zero)))
-;(println (church->int (exp one zero)))
-;(println (church->int (exp two zero)))
-;(println (church->int (exp two three)))
-(println (church->int (exp three two)))

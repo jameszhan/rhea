@@ -29,28 +29,39 @@
 ;(def mult (fn [m n] (fn [f] (n (m f)))))
 (def mult (fn [m n] (fn [f] (fn [x] ((n (m f)) x)))))
 
+(def exp (fn [a n] (fn [f] (fn [x] (((n a) f) x)))))
+
 (def church->int (fn [n] ((n (fn [x] (inc x))) 0)))
 
-(println (church->int zero))
-(println (church->int one))
-(println (church->int two))
-(println (church->int three))
+(assert (= (church->int zero) 0))
+(assert (= (church->int one) 1))
+(assert (= (church->int two) 2))
+(assert (= (church->int three) 3))
 
 (println "SUCC")
-(println (church->int (succ zero)))
-(println (church->int (succ one)))
-(println (church->int (succ two)))
+(assert (= (church->int (succ zero)) 1))
+(assert (= (church->int (succ one)) 2))
+(assert (= (church->int (succ two)) 3))
 
 (println "PLUS")
-(println (church->int (plus zero zero)))
-(println (church->int (plus one one)))
-(println (church->int (plus one two)))
-(println (church->int (plus three three)))
+(assert (= (church->int (plus zero zero)) 0))
+(assert (= (church->int (plus one one)) 2))
+(assert (= (church->int (plus one two)) 3))
+(assert (= (church->int (plus three three)) 6))
 
 (println "MUL")
-(println (church->int (mult zero three)))
-(println (church->int (mult one two)))
-(println (church->int (mult one three)))
-(println (church->int (mult three two)))
-(println (church->int (mult three (succ two))))
+(assert (= (church->int (mult zero three)) 0))
+(assert (= (church->int (mult one two)) 2))
+(assert (= (church->int (mult one three)) 3))
+(assert (= (church->int (mult three two)) 6))
+(assert (= (church->int (mult three (succ two))) 9))
+
+(println "EXP")
+(assert (= (church->int (exp zero zero)) 1))
+(assert (= (church->int (exp one zero)) 1))
+(assert (= (church->int (exp two zero)) 1))
+(assert (= (church->int (exp two three)) 8))
+(assert (= (church->int (exp three two)) 9))
+
+
 
