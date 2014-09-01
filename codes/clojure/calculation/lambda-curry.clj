@@ -9,6 +9,7 @@
 (defn mult [m] (fn [n] (fn [f] (n (m f)))))
 ;(defn mult [m n] (fn [f] (fn [x] ((n (m f)) x))))
 (defn exp [a] (fn [n] (n a)))
+;(defn exp [a] (fn [n] (fn [f] (fn [x] (((n a) f) x)))))
 
 (defn pred [n]
   (fn [f]
