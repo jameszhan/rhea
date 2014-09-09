@@ -1,6 +1,6 @@
 def loop(n, func):
     def inner(n):
-        if(n <= 0):
+        if n <= 0:
             return
         else:
             func(n)
@@ -8,6 +8,4 @@ def loop(n, func):
     inner(n)
 
 
-
 loop(10, lambda i: print('Hello World.', i))
-    
