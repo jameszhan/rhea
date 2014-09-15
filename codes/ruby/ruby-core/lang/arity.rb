@@ -1,30 +1,3 @@
-require "socket"
-
-=begin
-include Socket::Constants
-
-class TimeServer
-  def initialize(port)
-    @port = port
-  end
-
-  def start
-    sockaddr = Socket.pack_sockaddr_in(3000, 'localhost')
-    server = bind(sockaddr)
-    loop{
-      client = server.accpet
-      client.puts Time.now.ctime
-      client.close
-    }
-  end
-
-end
-
-
-ts = TimeServer.new(3000)
-ts.start
-
-=end
 
 puts BasicObject
 puts Fiber

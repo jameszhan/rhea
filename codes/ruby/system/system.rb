@@ -1,23 +1,27 @@
 
-`uname -nsaprm`.lines{|line| puts line}
+result = system("finger -m james")
+puts "result = #{result}"
 
-=begin
+puts `finger -m james`
 
-21、Linux共有几种类型的文件：
-d 目录。
-l 符号链接(指向另一个文件)。
-s 套接字文件。
-b 块设备文件。
-c 字符设备文件。
-p 命名管道文件。
-- 普通文件，或者更准确地说，不属于以上几种类型的文件。
+ls = IO.popen("ls -l")
+ls.each{|line|puts line}
 
-22、针对文件的权限:
-r 读权限。
-w 写权限。
-x 执行权限。
-s 文件属主和组set-ID。
-t 粘性位*。
-l 给文件加锁，使其他用户无法访问。
+pipe = IO.popen("-", "w+")
+if pipe
+  pipe.puts "Get a job!"
+  STDERR << "Child says '#{pipe.gets.chomp}'\n"
+else
+  STDERR << "Parent says '#{gets.chomp}'\n"
+  puts "OK"
+end
 
-=end
+IO.popen("date"){|f| puts "Date is #{f.gets}\n"}
+
+trap("CLD") do
+  pid = Process.wait
+  puts "Child pid #{pid}: terminated."
+end
+puts fork{ exec("sort testfile > output.txt") }
+
+

@@ -171,24 +171,6 @@ require "fileutils"
 #File.rename("temp/google.html", "temp/google.htm");
 
 
-require "find"
-
-Find.find("/usr/local/shared/ebooks")do|path|
-  dir, base = File.split(path)
-  if FileTest.directory?(path)
-    [/^\./, /^temp$/, /^library$/].each do |re|
-      if re =~ base
-        Find.prune;
-      end
-    end
-    puts "#{dir} #{base}"
-  else
-    unless /[.]pdf$/ =~ base
-      puts path
-    end
-  end
-end
-
 
 
 
