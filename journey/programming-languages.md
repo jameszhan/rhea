@@ -94,7 +94,7 @@ Read Macro
 5. 与操作系统的交互
 
 
-良好的语言应该能够以更少的代码、最小的开销表达更复 杂的想法。
+良好的语言应该能够以更少的代码、最小的开销表达更复杂的想法。
 
 
 ### 什么是Lambda Calculus？
@@ -216,7 +216,7 @@ void cpu() {
 
 * 鸭子类型(Duck Type)，Protocol 或 Interface
 Go语言中，只要有Interface中定义的方法，就算实现了该接口，赞！
-Swift尽管依然需要声明Class实现某Protocol，看起来也挺别扭的，但是swift中有extension，可以在类型定义后，再声明class实现protocol，虽然繁琐点，但依然不是灵活性。
+Swift尽管依然需要声明Class实现某Protocol，看起来也挺别扭的，但是swift中有extension，可以在类型定义后，再声明class实现protocol，虽然繁琐点，但依然不失灵活性。
 
 * method_missing
 ruby method_missing

@@ -16,6 +16,7 @@ module YCombinator
     lambda {|g| g[g] }.call(lambda{|f| lambda {|*args| gen[f[f]][*args] }})
   end
 
+
   def y_combinator(&gen)
     lambda {|&u| u.call(&u)}.call do |&f|
       gen.call(&lambda {|*args| f.call(&f).call(*args)})
@@ -53,4 +54,9 @@ factorial = y do |recurse|
   end
 end
 puts factorial.call(10)
+
+fac = y_combinator do|&f|
+  lambda{|n| n.zero? ? 1 : n * f.call(n - 1)}
+end
+puts fac.call(10)
 
